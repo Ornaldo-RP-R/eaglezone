@@ -1,0 +1,59 @@
+.shop-btn {
+  position: relative;
+  width: auto;
+  height: auto;
+  padding: 12px 30px;
+  border-radius: 5px;
+  margin-top: 5px;
+  background: linear-gradient(0deg, var(--color-gray-900), var(--color-gray-800));
+  font-weight: 500;
+}
+
+.shop-btn:before,
+.shop-btn:after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  border-radius: 5px;
+  background: linear-gradient(
+    45deg,
+    var(--color-primary-900),
+    var(--color-secondary-700),
+    var(--color-tertiary-900),
+    var(--color-orange-400),
+    var(--color-primary-200),
+    var(--color-primary-900),
+    var(--color-secondary-700),
+    var(--color-tertiary-900),
+    var(--color-orange-400),
+    var(--color-primary-200)
+  );
+  background-size: 400%;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  z-index: -1;
+  will-change: background-position;
+  animation: steam 20s linear infinite;
+}
+
+.shop-btn:after {
+  filter: blur(3px);
+}
+
+.shop-btn:hover:after,
+.shop-btn:active:after {
+  filter: blur(8px);
+}
+
+@keyframes steam {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}

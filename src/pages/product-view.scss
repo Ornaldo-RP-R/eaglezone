@@ -1,0 +1,49 @@
+@import "../assets/theme/tools/mediaQueries.scss";
+
+.small-view {
+  transition: border-color 250ms linear;
+  &.is-active {
+    border-color: var(--color-primary-600);
+  }
+  &:hover {
+    border-color: var(--color-primary-400);
+  }
+  &.is--tertiary {
+    &.is-active {
+      border-color: var(--color-tertiary-600);
+    }
+    &:hover {
+      border-color: var(--color-tertiary-400);
+    }
+  }
+  &.is--orange {
+    &.is-active {
+      border-color: var(--color-orange-600);
+    }
+    &:hover {
+      border-color: var(--color-orange-400);
+    }
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .views {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    top: 10px;
+    left: 10px;
+    scroll-snap-type: x mandatory;
+    flex-wrap: nowrap;
+    overflow: x mandatory;
+    overflow: auto;
+    z-index: 1;
+    height: 60px;
+  }
+  .small-view {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+  }
+}

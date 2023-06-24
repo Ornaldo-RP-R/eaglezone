@@ -1,0 +1,27 @@
+.categories .categories__item {
+  transition: all 230ms linear;
+  cursor: pointer;
+  img,
+  span {
+    transition: all 130ms linear;
+  }
+  &:is(:hover, :focus),
+  &.is--active {
+    color: var(--color-primary-700);
+    img {
+      filter: drop-shadow(2px 2px 3px var(--color-primary-500));
+    }
+  }
+  &:hover {
+    opacity: 0.8;
+    img {
+      filter: drop-shadow(2px 2px 5px var(--color-primary-800));
+    }
+  }
+  &:active {
+    opacity: 0.7;
+    img {
+      filter: drop-shadow(2px 2px 5px var(--color-primary-900));
+    }
+  }
+}

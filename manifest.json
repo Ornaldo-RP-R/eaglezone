@@ -1,0 +1,49 @@
+{
+  "name": "Eagle Zone Gaming Albania",
+  "short_name": "Eagle Zone",
+  "icons": [
+    {
+      "src": "https://weedeand.sirv.com/logo.png?w=196&h=196",
+      "sizes": "196x196",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "https://weedeand.sirv.com/logo.png?w=196&h=196",
+      "sizes": "196x196",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "https://weedeand.sirv.com/splash.png?w=512&h=512",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "splash_pages": {
+    "generated": {
+      "name": "Eagle Zone Gaming Albania",
+      "description": "Play your favorite games on Eagle Zone Gaming",
+      "background_color": "#cd2014",
+      "icons": [
+        {
+          "src": "https://weedeand.sirv.com/logo.png?w=196&h=196",
+          "sizes": "196x196",
+          "type": "image/png",
+          "purpose": "maskable any"
+        },
+        {
+          "src": "https://weedeand.sirv.com/logo.png?w=196&h=196",
+          "sizes": "196x196",
+          "type": "image/png",
+          "purpose": "maskable"
+        }
+      ]
+    }
+  },
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#141414",
+  "theme_color": "#cd2014",
+  "prefer_related_applications": false
+}

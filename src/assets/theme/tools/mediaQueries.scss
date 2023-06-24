@@ -1,0 +1,81 @@
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// MEDIA QUERIES
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Bootstrap breakpoints.
+ * @see https://getbootstrap.com/docs/5.1/layout/breakpoints/
+*/
+
+:root {
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-xxl: 1400px;
+  --breakpoint-2xl: 1600px;
+  --breakpoint-3xl: 1800px;
+  --breakpoint-4xl: 1920px;
+}
+
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+  2xl: 1600px,
+  3xl: 1800px,
+  4xl: 1920px,
+);
+
+@mixin media-breakpoint-up($breakpoint: map-get($breakpoints, "sm")) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+}
+
+@mixin media-breakpoint-down($breakpoint: map-get($breakpoints, "sm")) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $width: map-get($breakpoints, $breakpoint) - 1px;
+
+    @media (max-width: $width) {
+      @content;
+    }
+  }
+}
+
+@mixin media-breakpoint($breakpoint: map-get($breakpoints, "sm")) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoints-counter: length($breakpoints);
+    $map-list: map-keys($breakpoints);
+
+    @if index($map-list, $breakpoint) == $breakpoints-counter {
+      @include media-breakpoint-up($breakpoint) {
+        @content;
+      }
+    } @else {
+      $next-breakpoint-index: index($map-list, $breakpoint) + 1;
+      $next-breakpoint-key: nth($map-list, $next-breakpoint-index);
+      $min-width: map-get($breakpoints, $breakpoint);
+      $max-width: map-get($breakpoints, $next-breakpoint-key) - 1px;
+
+      @media (min-width: $min-width) and (max-width: $max-width) {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin between-breakpoints($min-breakpoint: map-get($breakpoints, "sm"), $max-breakpoint: map-get($breakpoints, "ms")) {
+  @if map-has-key($breakpoints, $min-breakpoint) and map-has-key($breakpoints, $max-breakpoint) {
+    $min-width: map-get($breakpoints, $min-breakpoint);
+    $max-width: map-get($breakpoints, $max-breakpoint) - 1px;
+
+    @media (min-width: $min-width) and (max-width: $max-width) {
+      @content;
+    }
+  }
+}

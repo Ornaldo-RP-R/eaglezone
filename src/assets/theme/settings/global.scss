@@ -1,0 +1,17 @@
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// GLOBAL
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+:root {
+  --base-font-family: "Alegreya SC", serif;
+  --base-font-size: 17px;
+  --base-font-weight: 500;
+  --base-spacing-unit: 1.5rem;
+  --base-border-radius: 0.625rem;
+  --fields-radius: 5px;
+  --card-radius: 10px;
+
+  --base-transition-timing: 330ms;
+  --base-transition-timing-function: ease-in-out;
+  --base-transition: all var(--base-transition-timing) var(--base-transition-timing-function);
+}

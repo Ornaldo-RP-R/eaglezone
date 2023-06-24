@@ -1,0 +1,111 @@
+@import "./assets//theme/tools/mediaQueries.scss";
+@import "./assets//theme/tools/keyframes.scss";
+
+body,
+html {
+  --zoom-rem-device-ratio: 1;
+  margin: 0;
+  font-family: var(--base-font-family);
+  font-smooth: antialiased;
+  -webkit-font-smoothing: antialiased;
+  font-size: calc(var(--base-font-size) * var(--zoom-rem-device-ratio));
+  font-weight: var(--base-font-weight);
+  letter-spacing: var(--p-2-letter-spacing);
+
+  @include media-breakpoint-down(3xl) {
+    --zoom-rem-device-ratio: 0.92;
+  }
+  @include media-breakpoint-down(2xl) {
+    --zoom-rem-device-ratio: 0.9;
+  }
+  @include media-breakpoint-down(xxl) {
+    --zoom-rem-device-ratio: 0.88;
+  }
+  @include media-breakpoint-down(xl) {
+    --zoom-rem-device-ratio: 0.8;
+  }
+  @include media-breakpoint-down(lg) {
+    --zoom-rem-device-ratio: 0.78;
+  }
+  @include media-breakpoint-down(md) {
+    --zoom-rem-device-ratio: 0.76;
+  }
+  @include media-breakpoint-down(sm) {
+    --zoom-rem-device-ratio: 0.74;
+  }
+
+  color: var(--color-white-900);
+}
+
+body {
+  background-color: var(--color-gray-900);
+  transition: background-color 200ms linear;
+}
+
+.lamp {
+  position: absolute;
+  top: 0;
+  height: calc(35 * var(--vh));
+  left: calc(114px + 8vw);
+  z-index: 1;
+  display: flex;
+  width: auto;
+  @include media-breakpoint-down(md) {
+    height: 100px;
+    left: calc(100px + 1rem);
+    img {
+      height: 100px;
+      width: auto;
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    left: calc(80px + 1rem);
+  }
+}
+.lamp-light {
+  animation: none;
+  will-change: opacity;
+  opacity: 0;
+  background: linear-gradient(
+    180deg,
+    hsla(0, 0%, 100%, 0.2),
+    hsla(0, 0%, 100%, 0.05),
+    hsla(0, 0%, 100%, 0.03),
+    hsla(0, 0%, 100%, 0.008),
+    hsla(0, 0%, 100%, 0.0001)
+  );
+  -webkit-clip-path: polygon(30% 0, 70% 0, 100% 100%, 0 100%);
+  clip-path: polygon(25% 0, 74% 0, 100% 100%, 0 100%);
+  display: block;
+  height: calc(35 * var(--vh));
+  left: calc(20vw - 122px);
+  left: 0;
+  margin: 0 auto;
+  position: absolute;
+  top: calc(33 * var(--vh));
+
+  z-index: 0;
+  width: 98%;
+  transform: translateX(2%);
+  &.is--shadow {
+    background: linear-gradient(
+      180deg,
+      hsla(0, 0%, 100%, 0.3),
+      hsla(0, 0%, 100%, 0.15),
+      hsla(0, 0%, 100%, 0.07),
+      hsla(0, 0%, 100%, 0.05),
+      hsla(0, 0%, 100%, 0.001)
+    );
+    transform: translateX(-18%);
+    width: 160%;
+    height: calc(50 * var(--vh));
+  }
+  @include media-breakpoint-down(md) {
+    top: 98px;
+  }
+}
+
+body.dark .lamp-light {
+  animation: shake 600ms linear;
+  opacity: 1;
+}

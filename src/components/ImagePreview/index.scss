@@ -1,0 +1,54 @@
+@import "../../assets/theme/tools/keyframes.scss";
+
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 999999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: #ebebeb;
+  transition: opacity 400ms ease-in-out;
+  opacity: 0;
+  &:not(.show) {
+    pointer-events: none;
+  }
+  &.show {
+    opacity: 1;
+  }
+}
+
+.modal img {
+  display: block;
+  margin: auto;
+  object-fit: contain;
+  margin-top: 50px;
+  object-position: center center;
+  max-height: calc(100% - 50px);
+}
+
+.modal__header {
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 12px;
+  left: 0;
+  position: absolute;
+  align-items: center;
+  right: 0;
+  height: 50px;
+  top: 0;
+  color: #ebebeb;
+  .close-btn {
+    margin-bottom: 5px;
+    display: block;
+    font-size: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    svg {
+      fill: var(--color-gray-400);
+    }
+  }
+}

@@ -1,0 +1,28 @@
+.app__about {
+  height: max-content;
+  .card {
+    background-color: var(--color-gray-700);
+    border-radius: 10px;
+    overflow: hidden;
+    p {
+      color: var(--color-white-800);
+    }
+    span {
+      color: var(--color-white-500);
+      font-weight: 500;
+    }
+    &::before {
+      content: "";
+      top: 0;
+      right: 0;
+      height: 180px;
+      transform: translate(50%, -60%);
+      z-index: 0;
+      aspect-ratio: 1.8;
+      border-radius: 45%;
+      position: absolute;
+      opacity: 0.3;
+      background-color: var(--color-primary-600);
+    }
+  }
+}

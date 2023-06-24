@@ -1,0 +1,111 @@
+@import "./tailwind.scss";
+@import "tools/mediaQueries";
+// Settings
+@import "settings/global";
+@import "settings/colors";
+@import "settings/typography";
+
+// Generic
+@import "generic/box-sizing";
+@import "generic/normalize";
+@import "generic/reset";
+@import "utils/utils";
+@import "generic/headings.scss";
+@import "utils/button.scss";
+
+$invertColors: "gray", "white";
+
+html [class*="bg-"] {
+  transition: background-color 200ms linear;
+}
+.next {
+  left: 0;
+  cursor: pointer;
+  svg {
+    transform: rotate(90deg);
+  }
+}
+.prev {
+  right: 0;
+  cursor: pointer;
+  svg {
+    transform: rotate(270deg);
+  }
+}
+// generate class of colors
+
+$colors: "primary", "secondary", "tertiary", "gray", "white", "orange";
+$tones: 900, 800, 700, 600, 500, 400, 300, 200, 100, 50;
+
+html {
+  @each $color in $colors {
+    @each $tone in $tones {
+      .text-#{$color}-#{$tone} {
+        color: var(--color-#{$color}-#{$tone});
+      }
+      .bg-#{$color}-#{$tone} {
+        background-color: var(--color-#{$color}-#{$tone});
+      }
+      .border-#{$color}-#{$tone} {
+        border-color: var(--color-#{$color}-#{$tone});
+      }
+      .fill-#{$color}-#{$tone} {
+        fill: var(--color-#{$color}-#{$tone});
+      }
+      .stroke-#{$color}-#{$tone} {
+        stroke: var(--color-#{$color}-#{$tone});
+      }
+    }
+  }
+}
+
+html body.dark {
+  @each $color in $invertColors {
+    @each $tone in $tones {
+      $inverted-color: if($color == "gray", "white", "gray");
+
+      .text-#{$inverted-color}-#{$tone} {
+        color: var(--color-#{$color}-#{$tone});
+      }
+      .bg-#{$inverted-color}-#{$tone} {
+        background-color: var(--color-#{$color}-#{$tone});
+      }
+      .border-#{$inverted-color}-#{$tone} {
+        border-color: var(--color-#{$color}-#{$tone});
+      }
+      .fill-#{$inverted-color}-#{$tone} {
+        fill: var(--color-#{$color}-#{$tone});
+      }
+      .stroke-#{$inverted-color}-#{$tone} {
+        stroke: var(--color-#{$color}-#{$tone});
+      }
+    }
+  }
+}
+
+body .h-screen {
+  height: calc(100 * var(--vh)) !important;
+  max-height: calc(100 * var(--vh)) !important;
+}
+
+:root [class*="overflow"] {
+  &::after {
+    content: "";
+    margin-bottom: 2px;
+  }
+  ::-webkit-scrollbar-thumb {
+    transition: all 200ms linear;
+  }
+  &:hover {
+    ::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: rgba(0, 0, 0, 0.5);
+      -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+    }
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    transition: width 200ms ease-in;
+  }
+}

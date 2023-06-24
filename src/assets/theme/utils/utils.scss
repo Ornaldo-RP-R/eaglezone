@@ -1,0 +1,18 @@
+.grid-cols-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+@for $i from 1 through 12 {
+  .col-span-#{$i} {
+    display: inline-grid;
+    grid-column: span #{$i} / span #{$i};
+  }
+  .col-start-#{$i} {
+    display: inline-grid;
+    grid-column-start: #{$i};
+  }
+  .row-span-#{$i} {
+    display: inline-grid;
+    grid-row: span #{$i} / span #{$i};
+  }
+}

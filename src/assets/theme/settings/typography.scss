@@ -1,0 +1,52 @@
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TYPOGRAPHY
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+:root {
+  --h1-font-size: 4.4rem;
+  --h1-line-height: 5.2rem;
+  --h1-letter-spacing: 0.2px;
+
+  --h2-font-size: 2.5rem;
+  --h2-line-height: 2.9rem;
+  --h2-letter-spacing: 0.2px;
+
+  --h3-font-size: 2.2rem;
+  --h3-line-height: 2.7rem;
+  --h3-letter-spacing: 0.1px;
+
+  --h4-font-size: 2rem;
+  --h4-line-height: 2.5rem;
+  --h4-letter-spacing: 0.2px;
+
+  --h5-font-size: 1.8rem;
+  --h5-line-height: 2.3rem;
+  --h5-letter-spacing: 0.1px;
+
+  --h6-font-size: 1.7rem;
+  --h6-line-height: 2.1rem;
+  --h6-letter-spacing: 0.1px;
+
+  --p-font-size: 1.4rem;
+  --p-line-height: 1.9rem;
+  --p-letter-spacing: 0.3px;
+
+  --p-2-font-size: 1.2rem;
+  --p-2-line-height: 1.6rem;
+  --p-2-letter-spacing: 0.3px;
+
+  --small-font-size: 0.95rem;
+  --small-line-height: 1.3rem;
+  --small-letter-spacing: 0.2px;
+}
+h1 {
+  font-weight: 700;
+  font-style: italic;
+}
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+}
