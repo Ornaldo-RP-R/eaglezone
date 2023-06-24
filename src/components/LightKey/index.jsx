@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "preact/compat";
 import "./index.scss";
 import { darkMode } from "../../helpers";
 

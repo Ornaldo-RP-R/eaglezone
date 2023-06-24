@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "preact/compat";
 import Image from "../../components/Image";
 import "./index.scss";
-import { useCallback } from "preact/hooks";
 
 const IntroductionChair = () => {
   const [canLoad45Deg, setCanLoad45Deg] = useState(false);
@@ -37,8 +36,8 @@ const IntroductionChair = () => {
     };
   }, []);
 
-  const onLoad = useCallback(() => setCanLoad45Deg(true), []);
-  const onLoadPillow = useCallback(() => setCanStartAnimation(true), []);
+  const onLoad = () => setCanLoad45Deg(true);
+  const onLoadPillow = () => setCanStartAnimation(true);
 
   return (
     <React.Fragment>

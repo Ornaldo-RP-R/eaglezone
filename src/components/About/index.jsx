@@ -1,4 +1,4 @@
-import React from "react";
+import React from "preact/compat";
 import Section from "../Section";
 import "./index.scss";
 

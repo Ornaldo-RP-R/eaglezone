@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useCallback, useMemo } from "preact/hooks";
+import React from "preact/compat";
+import { useState } from "preact/hooks";
 import Section from "../Section";
 import Image from "../Image";
 import "./index.scss";
@@ -10,10 +10,7 @@ const srcs = ["embrioryLogos.png", "cushionAndLumber.png", "leatherQuality.png"]
 const Quality = () => {
   const [activeSlide, setActiveSlide] = useState(srcs[0]);
   const { minTabletBig } = useWindowSize();
-  const gridTemplateRows = useMemo(
-    () => `grid-rows-[${srcs.map((src) => (src === activeSlide ? "auto" : "51px")).join("_")}]`,
-    [activeSlide]
-  );
+  const gridTemplateRows = `grid-rows-[${srcs.map((src) => (src === activeSlide ? "auto" : "51px")).join("_")}]`;
 
   return (
     <Section className="app__quality">
@@ -58,7 +55,7 @@ const Quality = () => {
 const QualityReason = (props) => {
   const { title, description, hasBorder = true, activeSlide, setActiveSlide, ...imgProps } = props;
   const { src } = imgProps || {};
-  const onClick = useCallback(() => setActiveSlide(src), [src, setActiveSlide]);
+  const onClick = () => setActiveSlide(src);
   const isActive = activeSlide === src;
   const { minTabletBig } = useWindowSize();
 

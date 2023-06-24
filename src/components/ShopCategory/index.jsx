@@ -1,4 +1,4 @@
-import React from "react";
+import React from "preact/compat";
 import Image from "../Image";
 import "./index.scss";
 import Link from "../Link";

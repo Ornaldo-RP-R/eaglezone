@@ -1,4 +1,4 @@
-import React from "react";
+import React from "preact/compat";
 import messenger from "../../assets/images/messenger";
 import gmail from "../../assets/images/gmail";
 import instagram from "../../assets/images/instagram";

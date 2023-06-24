@@ -1,4 +1,4 @@
-import React from "react";
+import React from "preact/compat";
 import Image from "../components/Image";
 import { useState, useEffect } from "preact/hooks";
 import "./product-view.scss";

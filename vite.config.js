@@ -65,7 +65,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          preact: ["preact", "preact/hooks"],
+          preact: ["preact/compat", "preact/hooks"],
         },
       },
     },

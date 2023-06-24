@@ -1,4 +1,4 @@
-import React from "react";
+import React from "preact/compat";
 
 const Section = (props) => {
   const { className, children } = props;

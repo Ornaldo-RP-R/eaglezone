@@ -1,4 +1,4 @@
-import React from "react";
+import React from "preact/compat";
 import Introduction from "../components/Introduction";
 import Adjustable from "../components/Adjustable";
 import Quality from "../components/Quality";

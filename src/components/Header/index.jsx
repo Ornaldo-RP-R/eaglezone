@@ -1,4 +1,4 @@
-import React from "react";
+import React from "preact/compat";
 import LightKey from "../LightKey";
 import { Link } from "wouter";
 import "./index.scss";

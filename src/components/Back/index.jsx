@@ -1,10 +1,9 @@
-import React from "react";
+import React from "preact/compat";
 import Image from "../Image";
 import { useState, useEffect, useRef } from "preact/hooks";
 import "./index.scss";
 import Arrow from "../../assets/images/arrow";
 import useOnScreen from "../../hooks/useOnScreen";
-import { isDeviceTouchable } from "../../helpers";
 
 const urls = ["martialBackOrange.png", "scoutBackRed.png", "scoutBackGreen.png"];
 const bgUrls = ["martialBackOrangeBg.jpeg", "scoutBackRedBg.jpeg", "scoutBackGreenBg.jpeg"];

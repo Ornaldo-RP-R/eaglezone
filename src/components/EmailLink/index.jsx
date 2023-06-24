@@ -1,4 +1,4 @@
-import React from "react";
+import React from "preact/compat";
 import { copyToClipboard } from "../../helpers";
 
 const EmailLink = (props) => {

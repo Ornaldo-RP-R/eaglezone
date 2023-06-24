@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "preact/compat";
 import { useState, useRef } from "preact/hooks";
 import { useEffect } from "preact/hooks";
 import ImagePreviewModal from "./components/ImagePreview";

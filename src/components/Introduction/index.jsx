@@ -1,4 +1,4 @@
-import React from "react";
+import React from "preact/compat";
 import { useState } from "preact/hooks";
 import Image from "../../components/Image";
 import Section from "../../components/Section";

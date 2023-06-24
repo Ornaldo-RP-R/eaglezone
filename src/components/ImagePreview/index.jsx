@@ -1,4 +1,4 @@
-import React, { useState, useImperativeHandle, forwardRef, useContext } from "react";
+import React, { useState, useImperativeHandle, forwardRef, useContext } from "preact/compat";
 import ModalContext from "./modalContext";
 import "./index.scss";
 

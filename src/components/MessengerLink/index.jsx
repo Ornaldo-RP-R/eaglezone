@@ -1,4 +1,4 @@
-import React from "react";
+import React from "preact/compat";
 import { copyToClipboard, facebookName } from "../../helpers";
 
 const MessengerLink = (props) => {

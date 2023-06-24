@@ -1,15 +1,16 @@
-import { useState, useRef, useMemo, useEffect, useContext, useCallback } from "preact/hooks";
-import React, { memo } from "react";
+import { useState, useRef, useEffect, useContext } from "preact/hooks";
+import React, { memo } from "preact/compat";
 import useOnScreen from "../../hooks/useOnScreen";
 import useWindowSize from "../../hooks/useWindowSize";
 import ModalContext from "../../components/ImagePreview/modalContext";
 import "./index.scss";
 import { isDeviceTouchable } from "../../helpers";
 
-let cdnCache = JSON.parse(localStorage.getItem("EagleZoneImageCdnCacheImgKit")) || {};
+let cdnCache = JSON.parse(localStorage.getItem("EagleZoneImageCdnCacheImgKitAl")) || {};
 
-let accounts = JSON.parse(localStorage.getItem("EagleZoneImageAccountsCacheImgKit")) || {
+let accounts = JSON.parse(localStorage.getItem("EagleZoneImageAccountsCacheImgKitAl")) || {
   eaglezone: 0,
+  eagleZoneAl: 0,
 };
 
 let getCdn = (src, w, q, isBlur) => {
@@ -41,6 +42,7 @@ const ImageComponent = (props) => {
     zoomSizes,
     imgClass,
     zoomLevel = 1,
+    onLoad,
   } = props;
   const [show, setShow] = useState(!!hasNotPreview);
   const [startLoadingZoom, setStartLoadingZoom] = useState(false);
@@ -55,14 +57,8 @@ const ImageComponent = (props) => {
   const { mountedAndShowed } = useOnScreen(imgRef);
   const shouldCover = (imgClass || "").includes("object-cover");
 
-  const size = useMemo(
-    () => getSize(sizes, shouldCover ? Infinity : windowWidth, device),
-    [sizes, device, shouldCover]
-  );
-  const zoomSize = useMemo(
-    () => allowZoom && getSize(zoomSizes || sizes, Infinity, device, true),
-    [allowZoom, zoomSizes, sizes, device]
-  );
+  const size = getSize(sizes, shouldCover ? Infinity : windowWidth, device);
+  const zoomSize = allowZoom && getSize(zoomSizes || sizes, Infinity, device, true);
   const { width, imgWidth, imgHeight, aspectRatio } = size;
   const {
     width: zoomWidth,
@@ -71,32 +67,23 @@ const ImageComponent = (props) => {
     aspectRatio: zoomAspectRatio,
   } = zoomSize || {};
 
-  const onMouseMove = useCallback(
-    (event) => {
-      const container = containerRef.current;
+  const onMouseMove = (event) => {
+    const containerRect = containerRef?.current?.getBoundingClientRect?.();
+    const { left, top, width, height } = containerRect || {};
+    const mouseX = event.clientX - left;
+    const mouseY = event.clientY - top;
+    const newZoomPos = {
+      left: `${Math.max(Math.min(mouseX - 100, width - 180), 20)}px`,
+      top: `${Math.min(Math.max(mouseY - 100, -20), height - 180)}px`,
+      posLeft: `${((Math.floor(mouseX) + 0.00001) / width) * 100}%`,
+      posTop: `${((Math.floor(mouseY) + 0.00001) / height) * 100}%`,
+    };
 
-      const containerRect = container.getBoundingClientRect();
-      const mouseX = event.clientX - containerRect.left;
-      const mouseY = event.clientY - containerRect.top;
-      const newZoomPos = {
-        left: `${Math.max(Math.min(mouseX - 100, containerRect.width - 180), 20)}px`,
-        top: `${Math.min(Math.max(mouseY - 100, -20), containerRect.height - 180)}px`,
-        posLeft: `${((Math.floor(mouseX) + 0.00001) / containerRect.width) * 100}%`,
-        posTop: `${((Math.floor(mouseY) + 0.00001) / containerRect.height) * 100}%`,
-      };
+    if (!zoom) setZoom(true);
+    setZoomPos(newZoomPos);
+  };
 
-      if (!zoom) setZoom(true);
-      setZoomPos(newZoomPos);
-    },
-    [zoom]
-  );
-
-  const onMouseLeave = useCallback(() => setZoom(false), []);
-
-  const onLoad = useCallback(() => {
-    if (props.onLoad && show) props.onLoad();
-    if (show && allowZoom && !startLoadingZoom) setStartLoadingZoom(true);
-  }, [props.onLoad, show, allowZoom, startLoadingZoom]);
+  const onMouseLeave = () => setZoom(false);
 
   const zoomSrc = allowZoom && buildSrc(src, zoomWidth, zoomQuality || quality);
   const imgSrc = zoomLoaded && zoomSrc ? zoomSrc : buildSrc(getSrc(src, !show), width, quality, !show);
@@ -139,17 +126,6 @@ const ImageComponent = (props) => {
       setShow(true);
     }
   }, [mountedAndShowed]);
-  const styles = useMemo(
-    () => ({
-      position: "absolute",
-      left: zoomPos.left,
-      top: zoomPos.top,
-      backgroundPosition: `${zoomPos.posLeft} ${zoomPos.posTop}`,
-      backgroundImage: `url(${zoomSrc})`,
-      backgroundSize: `${zoomImgWidth * zoomLevel}px ${zoomImgHeight * zoomLevel}px`,
-    }),
-    [JSON.stringify(zoomPos), zoomImgWidth, zoomLevel, zoomImgHeight, zoomAspectRatio]
-  );
 
   useEffect(() => {
     if (containerRef.current) containerRef.current.style = `aspect-ratio:${zoomLoaded ? zoomAspectRatio : aspectRatio}`;
@@ -163,12 +139,29 @@ const ImageComponent = (props) => {
         allowZoom ? (!zoomLoaded ? "cursor-wait" : "cursor-zoom-in") : ""
       }`}
     >
-      <img {...imgProps} src={imgSrc} ref={imgRef} width={imgWidth} onLoad={onLoad} height={imgHeight} />
+      <img
+        {...imgProps}
+        src={imgSrc}
+        ref={imgRef}
+        width={imgWidth}
+        onLoad={() => {
+          if (onLoad && show) onLoad();
+          if (show && allowZoom && !startLoadingZoom) setStartLoadingZoom(true);
+        }}
+        height={imgHeight}
+      />
 
       {zoom && allowZoom && !isTouchable && zoomLoaded && (
         <div
           className="w-[200px] h-[200px] bg-no-repeat	rounded-[50%] pointer-events-none z-10 border border-gray-200"
-          style={styles}
+          style={{
+            position: "absolute",
+            left: zoomPos.left,
+            top: zoomPos.top,
+            backgroundPosition: `${zoomPos.posLeft} ${zoomPos.posTop}`,
+            backgroundImage: `url(${zoomSrc})`,
+            backgroundSize: `${zoomImgWidth * zoomLevel}px ${zoomImgHeight * zoomLevel}px`,
+          }}
         />
       )}
     </div>
@@ -186,8 +179,8 @@ const blurStyle = { filter: "blur(20px)" };
 const isMac = window.navigator.vendor.includes("Apple");
 const buildSrc = (src, w, q, isBlur) => {
   const base = `${getCdn(src, w, q, isBlur)}/${src}`;
-  if (isBlur) return `${base}?f-auto&q-76`;
-  return `${base}?tr:w-${parseInt(w * (isMac ? 1.4 : 1.1))}&f-auto${q ? `&q-${q}` : ""}`;
+  if (isBlur) return `${base}?tr=q-76`;
+  return `${base}?tr=w-${parseInt(w * (isMac ? 1.4 : 1.1))}${q ? `,q-${q}` : ""}`;
 };
 
 const getSize = (sizes, windowWidth, device, zoom) => {

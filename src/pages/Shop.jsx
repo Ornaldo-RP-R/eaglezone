@@ -1,4 +1,4 @@
-import React from "react";
+import React from "preact/compat";
 import { useEffect } from "preact/hooks";
 import Header from "../components/Header";
 import Section from "../components/Section";

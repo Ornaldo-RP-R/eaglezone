@@ -12,7 +12,7 @@
     "cssnano": "^6.0.0",
     "html-minifier-terser": "^7.1.0",
     "postcss-preset-env": "^8.3.0",
-    "preact": "^10.11.3",
+    "preact/compat": "^10.11.3",
     "sass": "^1.58.3",
     "uglify-js": "^3.17.4",
     "vite-plugin-compression": "^0.5.1",

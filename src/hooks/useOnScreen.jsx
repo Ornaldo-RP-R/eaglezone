@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect, useMemo, useEffect } from "react";
+import { useState, useRef, useLayoutEffect, useEffect } from "preact/compat";
 
 export default function useOnScreen(ref, options, mount = true) {
   let { current: observer } = useRef();
@@ -7,7 +7,7 @@ export default function useOnScreen(ref, options, mount = true) {
   const [entry, setEntry] = useState({});
   const { isIntersecting, isVisible } = entry;
   const [mounted, setIsMounted] = useState(false);
-  const mountedAndShowed = useMemo(() => !!mounted && !!isIntersecting, [mounted, isIntersecting]);
+  const mountedAndShowed = !!mounted && !!isIntersecting;
 
   useLayoutEffect(() => {
     if (mount) {
