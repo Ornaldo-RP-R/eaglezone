@@ -1,17 +1,13 @@
-import React from "preact/compat";
 import Introduction from "../components/Introduction";
 import Adjustable from "../components/Adjustable";
 import Quality from "../components/Quality";
 import Back from "../components/Back";
 import Footer from "../components/Footer";
 import About from "../components/About";
-import { useEffect } from "preact/hooks";
+import useLoadingForDyanmicRoute from "../hooks/useLoadingForDyanmicRoute";
 
-export function Home(props) {
-  const { setLoading } = props;
-  useEffect(() => {
-    setLoading(false);
-  }, []);
+export function Home() {
+  useLoadingForDyanmicRoute();
 
   return (
     <div className="app h-full z-0 relative">

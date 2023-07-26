@@ -1,5 +1,4 @@
-import React from "preact/compat";
-import Image from "../Image";
+import Picture from "../Picture/Picture";
 import { useState, useEffect, useRef } from "preact/hooks";
 import "./index.scss";
 import Arrow from "../../assets/images/arrow";
@@ -44,7 +43,7 @@ const Back = () => {
         <Arrow className="min-h-[50px]" />
       </button>
       <div className="flex relative h-full">
-        <Image
+        <Picture
           className="h-full w-full flex fade"
           imgClass="w-full object-cover opacity-50"
           key={bgUrls[currentIndex]}
@@ -53,7 +52,7 @@ const Back = () => {
           alt="Sfond i nje loje per pjesen mbrapa te karriges"
           sizes="desktop-big=120%,1.77777777778;tablet-big=1500,1.77777777778"
         />
-        <Image
+        <Picture
           className="h-full w-full flex fade absolute back__chair-content"
           imgClass="w-full object-cover"
           key={urls[currentIndex]}

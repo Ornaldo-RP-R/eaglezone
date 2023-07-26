@@ -1,4 +1,3 @@
-import React from "preact/compat";
 import { copyToClipboard, isDeviceTouchable } from "../../helpers";
 
 const InstagramLink = (props) => {

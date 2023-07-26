@@ -51,7 +51,6 @@
   --color-tertiary-50: #ebfce8;
 
   // Gray color Palette
-
   --color-white-900: #141414;
   --color-white-800: #343434;
   --color-white-700: #525252;
@@ -73,6 +72,32 @@
   --color-gray-200: #525252;
   --color-gray-100: #343434;
   --color-gray-50: #141414;
+
+  --color-info-50: #e5f4f4;
+  --color-info-100: #b8e5e8;
+  --color-info-300: #5ac2d6;
+  --color-info-700: #008089;
+
+  --color-error-900: #85003b;
+  --color-error-700: #bc1042;
+  --color-error-500: #e01c46;
+  --color-error-300: #ed5d7a;
+  --color-error-100: #f9b8c5;
+  --color-error-50: #fde3e8;
+
+  --color-warning-900: #db7700;
+  --color-warning-700: #e0b61c;
+  --color-warning-500: #e1de30;
+  --color-warning-300: #e9e86f;
+  --color-warning-100: #f5f5c1;
+  --color-warning-50: #fbfbe6;
+
+  --color-success-900: #006329;
+  --color-success-700: #009155;
+  --color-success-500: #00b172;
+  --color-success-300: #00cf98;
+  --color-success-100: #94ecd3;
+  --color-success-50: #d4f8ef;
 }
 
 body.dark {

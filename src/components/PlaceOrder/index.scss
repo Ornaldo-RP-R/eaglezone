@@ -1,0 +1,334 @@
+.order {
+  appearance: none;
+  border: 0;
+  position: relative;
+  min-height: 64px;
+  width: 300px;
+  outline: none;
+  cursor: pointer;
+  border-radius: 32px;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  &.animate span {
+    opacity: 0;
+  }
+  span {
+    opacity: 1;
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    top: 19px;
+    line-height: 24px;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+    &.default {
+      transition-delay: 0.3s;
+    }
+  }
+  &:active:not(.is-disabled) {
+    transform: scale(0.96);
+  }
+  .lines {
+    opacity: 0;
+    position: absolute;
+    height: 3px;
+    background: var(--color-gray-900);
+    border-radius: 2px;
+    width: 6px;
+    top: 30px;
+    left: 100%;
+    $line-width: 16px;
+    $line-count: 340;
+    $line-shadow: ();
+    @for $i from 1 through $line-count {
+      $line-shadow: join($line-shadow, #{($line-width * $i) 0 0 var(--color-gray-900)}, comma);
+    }
+    box-shadow: $line-shadow;
+  }
+  .box {
+    border-radius: 2px;
+    background: linear-gradient(var(--color-orange-900), var(--color-orange-400));
+    position: absolute;
+  }
+  .back {
+    border-radius: 2px;
+    background: linear-gradient(var(--color-white-900), var(--color-gray-400));
+    position: absolute;
+  }
+  .truck {
+    width: 60px;
+    height: 41px;
+    left: 100%;
+    z-index: 1;
+    top: 11px;
+    position: absolute;
+    transform: translateX(24px);
+    &:before,
+    &:after {
+      --r: -90deg;
+      content: "";
+      height: 2px;
+      width: 20px;
+      right: 58px;
+      position: absolute;
+      display: block;
+      background: var(--color-gray-900);
+      border-radius: 1px;
+      transform-origin: 100% 50%;
+      transform: rotate(var(--r));
+    }
+    &:before {
+      top: 4px;
+    }
+    &:after {
+      --r: 90deg;
+      bottom: 4px;
+    }
+    .back {
+      left: 0;
+      top: 0;
+      width: 60px;
+      height: 41px;
+      z-index: 1;
+    }
+    .front {
+      overflow: hidden;
+      position: absolute;
+      border-radius: 2px 9px 9px 2px;
+      width: 26px;
+      height: 41px;
+      left: 60px;
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        display: block;
+      }
+      &:before {
+        height: 13px;
+        width: 2px;
+        left: 0;
+        top: 14px;
+        background: linear-gradient(var(--color-gray-500), var(--color-gray-700));
+      }
+      &:after {
+        border-radius: 2px 9px 9px 2px;
+        background: var(--color-primary-700);
+        width: 24px;
+        height: 41px;
+        right: 0;
+      }
+      .window {
+        overflow: hidden;
+        border-radius: 2px 8px 8px 2px;
+        background: var(--color-primary-400);
+        transform: perspective(4px) rotateY(3deg);
+        width: 22px;
+        height: 41px;
+        position: absolute;
+        left: 2px;
+        top: 0;
+        z-index: 1;
+        transform-origin: 0 50%;
+        &:before,
+        &:after {
+          content: "";
+          position: absolute;
+          right: 0;
+        }
+        &:before {
+          top: 0;
+          bottom: 0;
+          width: 14px;
+          background: var(--color-gray-900);
+        }
+        &:after {
+          width: 14px;
+          top: 7px;
+          height: 4px;
+          position: absolute;
+          background: rgba(255, 255, 255, 0.14);
+          transform: skewY(14deg);
+          box-shadow: 0 7px 0 rgba(255, 255, 255, 0.14);
+        }
+      }
+    }
+    .light {
+      width: 3px;
+      height: 8px;
+      left: 83px;
+      transform-origin: 100% 50%;
+      position: absolute;
+      border-radius: 2px;
+      transform: scaleX(0.8);
+      background: rgba(240, 220, 95, 1);
+      &:before {
+        content: "";
+        height: 4px;
+        width: 7px;
+        opacity: 0;
+        transform: perspective(2px) rotateY(-15deg) scaleX(0.94);
+        position: absolute;
+        transform-origin: 0 50%;
+        left: 3px;
+        top: 50%;
+        margin-top: -2px;
+        background: linear-gradient(90deg, rgba(240, 220, 95, 1), rgba(240, 220, 95, 0.7), rgba(240, 220, 95, 0));
+      }
+      &.top {
+        top: 4px;
+      }
+      &.bottom {
+        bottom: 4px;
+      }
+    }
+  }
+  .box {
+    width: 21px;
+    height: 21px;
+    right: 100%;
+    top: 21px;
+    &:before,
+    &:after {
+      content: "";
+      top: 10px;
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+    &:before {
+      height: 3px;
+      margin-top: -1px;
+      background: rgba(0, 0, 0, 0.1);
+    }
+    &:after {
+      height: 1px;
+      background: rgba(0, 0, 0, 0.15);
+    }
+  }
+  &.animate {
+    .default {
+      transition-delay: 0s;
+    }
+    .truck {
+      animation: truck 4s ease forwards;
+      &:before {
+        animation: door1 0.88s ease forwards 0.3s;
+      }
+      &:after {
+        animation: door2 0.88s ease forwards 0.6s;
+      }
+      .light {
+        &:before,
+        &:after {
+          animation: light 4s ease forwards;
+        }
+      }
+    }
+    .box {
+      animation: box 4s ease forwards;
+    }
+    .lines {
+      animation: lines 4s ease forwards, lines-continue 14.5s ease forwards infinite;
+    }
+  }
+}
+
+@keyframes truck {
+  10%,
+  30% {
+    transform: translateX(-250px);
+  }
+  40% {
+    transform: translateX(-180px);
+  }
+  60% {
+    transform: translateX(-280px);
+  }
+  75%,
+  100% {
+    transform: translateX(-210px);
+  }
+}
+
+@keyframes lines-continue {
+  0% {
+    transform: scaleY(0.7) translateX(-430px);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(0.7) translateX(-2000px);
+  }
+}
+
+@keyframes lines {
+  0%,
+  20% {
+    opacity: 0;
+    transform: scaleY(0.7) translateX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(0.7) translateX(-430px);
+  }
+}
+
+@keyframes light {
+  0%,
+  30% {
+    opacity: 0;
+    transform: perspective(2px) rotateY(-15deg) scaleX(0.88);
+  }
+  40%,
+  100% {
+    opacity: 1;
+    transform: perspective(2px) rotateY(-15deg) scaleX(0.94);
+  }
+}
+
+@keyframes door1 {
+  30%,
+  50% {
+    transform: rotate(32deg);
+  }
+}
+
+@keyframes door2 {
+  30%,
+  50% {
+    transform: rotate(-32deg);
+  }
+}
+
+@keyframes box {
+  8%,
+  10% {
+    transform: translateX(25px);
+    opacity: 1;
+  }
+  25% {
+    transform: translateX(100px);
+    opacity: 1;
+  }
+  26% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  27%,
+  100% {
+    transform: translateX(0px);
+    opacity: 0;
+  }
+}
+
+body:not(.dark) .order {
+  .truck .front .window:before {
+    background-color: var(--color-white-900);
+  }
+  .back {
+    background: linear-gradient(var(--color-gray-900), var(--color-white-400));
+  }
+}

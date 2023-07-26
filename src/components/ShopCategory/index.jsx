@@ -1,5 +1,4 @@
-import React from "preact/compat";
-import Image from "../Image";
+import Picture from "../Picture/Picture";
 import "./index.scss";
 import Link from "../Link";
 
@@ -53,7 +52,7 @@ const CategoryItem = (props) => {
         isActive ? "is--active" : ""
       }`}
     >
-      <Image className="max-h-[90px]" loading="eager" hasNotPreview {...imgProps} />
+      <Picture fixedWidth className="max-h-[90px]" loading="eager" hasNotPreview {...imgProps} />
       <span className="font-small w-full text-center">{title}</span>
     </Link>
   );

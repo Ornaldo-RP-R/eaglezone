@@ -1,7 +1,6 @@
-import React from "preact/compat";
 import { useState } from "preact/hooks";
 import Section from "../Section";
-import Image from "../Image";
+import Picture from "../Picture/Picture";
 import "./index.scss";
 import useWindowSize from "../../hooks/useWindowSize";
 import Arrow from "../../assets/images/arrow";
@@ -19,7 +18,7 @@ const Quality = () => {
         <div
           className={`grid lg:gap-0 gap-3 lg:pt-0 pt-2 ${
             minTabletBig ? gridTemplateRows : ""
-          } lg:grid-cols-3 w-full border-t border-b border-white-800`}
+          } lg:grid-cols-3 w-full border-t border-b border-white-800 dark:border-gray-800`}
         >
           <QualityReason
             setActiveSlide={setActiveSlide}
@@ -70,14 +69,14 @@ const QualityReason = (props) => {
   return (
     <div
       className={`relative w-full h-full ${
-        hasBorder ? `${minTabletBig ? "border-b" : "border-r"} border-white-800` : ""
+        hasBorder ? `${minTabletBig ? "border-b" : "border-r"} border-white-800 dark:border-gray-800` : ""
       } lg:p-4 pb-4 flex flex-col h-full overflow-hidden`}
     >
       <p className="w-full">{titleChild}</p>
-      <span className="mb-6 text-white-600 lg:flex hidden">{description}</span>
+      <span className="mb-6 text-white-600 dark:text-gray-800 lg:flex hidden">{description}</span>
       {(isActive || !minTabletBig) && (
         <div className="flex flex-auto overflow-hidden">
-          <Image
+          <Picture
             className="h-full w-full"
             imgClass="object-left-top object-cover rounded-xl w-full h-full"
             loading="lazy"

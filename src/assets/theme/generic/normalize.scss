@@ -148,6 +148,8 @@ sup {
 
 img {
   border-style: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 /* Forms

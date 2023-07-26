@@ -1,6 +1,6 @@
-import React from "preact/compat";
+import { createContext } from "preact/compat";
 
-const ModalContext = React.createContext({
+const ModalContext = createContext({
   openModal: () => {},
   props: {},
 });

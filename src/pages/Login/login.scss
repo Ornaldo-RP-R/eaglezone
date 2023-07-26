@@ -1,0 +1,33 @@
+.carousel-root,
+.slider,
+.slider-wrapper,
+.carousel {
+  height: 100%;
+}
+
+.carousel-root .fast-image {
+  height: 95%;
+}
+
+.carousel .control-dots {
+  bottom: 15px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  > li,
+  .dot {
+    margin: 0;
+    box-shadow: none;
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    min-height: 12px;
+    border-radius: 100%;
+    opacity: 0.4;
+    background-color: var(--color-gray-900);
+    &.selected {
+      opacity: 1;
+    }
+  }
+}

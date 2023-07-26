@@ -1,5 +1,4 @@
-import React from "preact/compat";
-import Image from "../Image";
+import Picture from "../Picture/Picture";
 import Link from "../Link";
 
 const Product = (props) => {
@@ -11,7 +10,7 @@ const Product = (props) => {
         aria-label={props["aria-label"]}
         className={`flex h-full p-4 pb-0 flex-col product is--${color}`}
       >
-        <Image loading="eager" qualtiy={80} className="w-full mb-auto" {...imgProps} />
+        <Picture loading="eager" qualtiy={80} className="w-full mb-auto" {...imgProps} />
         <p className="product__title">{title}</p>
       </Link>
     </div>

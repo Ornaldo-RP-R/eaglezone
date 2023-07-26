@@ -6,12 +6,12 @@
   background: linear-gradient(295deg, var(--color-orange-50), var(--color-orange-200));
   transition: all 100ms linear;
   @include media-breakpoint-down(lg) {
-    min-width: calc(50vw - 3rem);
-    width: calc(50vw - 3rem);
+    min-width: calc(50svw - 3rem);
+    width: calc(50svw - 3rem);
   }
   @include media-breakpoint-down(md) {
-    min-width: calc(100vw - 2.5rem);
-    width: calc(100vw - 2.5rem);
+    min-width: calc(100svw - 2.5rem);
+    width: calc(100svw - 2.5rem);
   }
   &:hover {
     background: linear-gradient(295deg, var(--color-orange-50), var(--color-orange-300));

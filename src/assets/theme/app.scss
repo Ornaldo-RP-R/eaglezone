@@ -13,9 +13,7 @@
 @import "generic/headings.scss";
 @import "utils/button.scss";
 
-$invertColors: "gray", "white";
-
-html [class*="bg-"] {
+html [class*="bg-"]:not(.transition-all) {
   transition: background-color 200ms linear;
 }
 .next {
@@ -33,56 +31,6 @@ html [class*="bg-"] {
   }
 }
 // generate class of colors
-
-$colors: "primary", "secondary", "tertiary", "gray", "white", "orange";
-$tones: 900, 800, 700, 600, 500, 400, 300, 200, 100, 50;
-
-html {
-  @each $color in $colors {
-    @each $tone in $tones {
-      .text-#{$color}-#{$tone} {
-        color: var(--color-#{$color}-#{$tone});
-      }
-      .bg-#{$color}-#{$tone} {
-        background-color: var(--color-#{$color}-#{$tone});
-      }
-      .border-#{$color}-#{$tone} {
-        border-color: var(--color-#{$color}-#{$tone});
-      }
-      .fill-#{$color}-#{$tone} {
-        fill: var(--color-#{$color}-#{$tone});
-      }
-      .stroke-#{$color}-#{$tone} {
-        stroke: var(--color-#{$color}-#{$tone});
-      }
-    }
-  }
-}
-
-html body.dark {
-  @each $color in $invertColors {
-    @each $tone in $tones {
-      $inverted-color: if($color == "gray", "white", "gray");
-
-      .text-#{$inverted-color}-#{$tone} {
-        color: var(--color-#{$color}-#{$tone});
-      }
-      .bg-#{$inverted-color}-#{$tone} {
-        background-color: var(--color-#{$color}-#{$tone});
-      }
-      .border-#{$inverted-color}-#{$tone} {
-        border-color: var(--color-#{$color}-#{$tone});
-      }
-      .fill-#{$inverted-color}-#{$tone} {
-        fill: var(--color-#{$color}-#{$tone});
-      }
-      .stroke-#{$inverted-color}-#{$tone} {
-        stroke: var(--color-#{$color}-#{$tone});
-      }
-    }
-  }
-}
-
 body .h-screen {
   height: calc(100 * var(--vh)) !important;
   max-height: calc(100 * var(--vh)) !important;

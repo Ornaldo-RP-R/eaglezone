@@ -1,16 +1,12 @@
-import React from "preact/compat";
-import { useEffect } from "preact/hooks";
 import Header from "../components/Header";
 import Section from "../components/Section";
 import ShopCategory from "../components/ShopCategory";
 import Chairs from "./Chairs";
 import ShopMain from "../components/ShopMain";
+import useLoadingForDyanmicRoute from "../hooks/useLoadingForDyanmicRoute";
 
-export function Shop(props) {
-  const { setLoading } = props;
-  useEffect(() => {
-    setLoading(false);
-  }, []);
+export function Shop() {
+  useLoadingForDyanmicRoute();
 
   const id = new URL(window.location.href).pathname.split("/")[2];
 
@@ -19,7 +15,7 @@ export function Shop(props) {
       <div className="sticky w-max mx-auto top-0 md:py-7  py-2 z-10 md:top-[0] top-[107px]  overflow-visible">
         <ShopCategory />
       </div>
-      <Section className="app__introduction h-auto relative z-0 h-full md:top-[-180px] top-[-140px]">
+      <Section className="app__introduction h-auto relative z-0 h-full md:top-[-173px] top-[-131px]">
         <Header onShop />
       </Section>
       <ShopMain>

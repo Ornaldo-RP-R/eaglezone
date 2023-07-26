@@ -1,6 +1,6 @@
 export default (props) => (
   <svg
-    className="fill-white-900"
+    className="fill-current text-white-900 dark:text-gray-900"
     height="800px"
     width="800px"
     version="1.1"

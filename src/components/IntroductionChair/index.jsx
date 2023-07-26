@@ -1,49 +1,56 @@
-import React, { useEffect, useState } from "preact/compat";
-import Image from "../../components/Image";
+import { useEffect, useState, useRef } from "preact/hooks";
+import Picture from "../Picture/Picture";
 import "./index.scss";
 
 const IntroductionChair = () => {
   const [canLoad45Deg, setCanLoad45Deg] = useState(false);
-  const [canStartAnimation, setCanStartAnimation] = useState(false);
-
   const [showFront, setShowFront] = useState(true);
   const [finalShow, setFinalShow] = useState(false);
+  const [canStartAnimation, setCanStartAnimation] = useState(false);
 
-  const [isListening, setIsListening] = useState({});
+  const animationEndListener = useRef(false);
+  const transitionEndListener = useRef(false);
+
   const showOnAnimationEndMartialPillow = () => setShowFront(false);
   const showOnTransitionEndMartial45Deg = () => setFinalShow(true);
-  const nartialPillow = document.querySelector(".martialPillow");
-  const martial45deg = document.querySelector(".martial45deg");
+  const containerRef = useRef(null);
+
+  const getSelectors = () => {
+    const nartialPillow = containerRef.current?.querySelector?.(".martialPillow");
+    const martial45deg = containerRef.current?.querySelector?.(".martial45deg");
+    return { nartialPillow, martial45deg };
+  };
+
+  const unmount = () => {
+    const { nartialPillow, martial45deg } = getSelectors();
+    nartialPillow?.removeEventListener?.("animationend", showOnAnimationEndMartialPillow, true);
+    martial45deg?.removeEventListener?.("animationend", showOnAnimationEndMartialPillow, true);
+  };
 
   useEffect(() => {
-    if (nartialPillow && showFront && canLoad45Deg && !isListening.martialPillow) {
+    const { nartialPillow, martial45deg } = getSelectors();
+    if (nartialPillow && showFront && canLoad45Deg && !animationEndListener?.current) {
       nartialPillow.addEventListener("animationend", showOnAnimationEndMartialPillow, true);
-      setIsListening((l) => ({ ...l, martialPillow: true }));
+      animationEndListener.current = true;
     }
-  }, [showFront, canLoad45Deg, nartialPillow]);
-
-  useEffect(() => {
-    if (martial45deg && showFront && canLoad45Deg && !isListening.martial45deg) {
+    if (martial45deg && showFront && canLoad45Deg && !transitionEndListener?.current) {
       martial45deg.addEventListener("transitionend", showOnTransitionEndMartial45Deg, true);
-      setIsListening((l) => ({ ...l, martial45deg: true }));
+      transitionEndListener.current = true;
     }
-  }, [showFront, canLoad45Deg, martial45deg]);
+    return unmount;
+  }, [containerRef.current, showFront, canLoad45Deg]);
 
-  useEffect(() => {
-    return () => {
-      nartialPillow?.removeEventListener?.("animationend", showOnAnimationEndMartialPillow, true);
-      martial45deg?.removeEventListener?.("animationend", showOnAnimationEndMartialPillow, true);
-    };
-  }, []);
+  useEffect(() => unmount, []);
 
   const onLoad = () => setCanLoad45Deg(true);
   const onLoadPillow = () => setCanStartAnimation(true);
 
   return (
-    <React.Fragment>
+    <div ref={containerRef}>
       {!finalShow && (
-        <Image
+        <Picture
           quality={60}
+          fixedWidth
           className={`introduction-chair absolute ${showFront ? "" : "is-hidden"}`}
           src="martialFrontNoPillow.png"
           onLoad={onLoad}
@@ -53,7 +60,8 @@ const IntroductionChair = () => {
         />
       )}
       {canLoad45Deg && (
-        <Image
+        <Picture
+          fixedWidth
           className={`introduction-chair absolute martial45deg z-10 ${!showFront ? "" : "is-hidden"}`}
           src="martial45deg.png"
           loading="eager"
@@ -65,9 +73,10 @@ const IntroductionChair = () => {
         />
       )}
       {showFront && canLoad45Deg && !finalShow && (
-        <Image
+        <Picture
           quality={70}
           hasNotPreview
+          fixedWidth
           className={`martialPillow absolute ${canStartAnimation ? "can-start-animation" : ""}`}
           src="martialPillow.png"
           onLoad={onLoadPillow}
@@ -76,7 +85,7 @@ const IntroductionChair = () => {
           sizes="desktop-big=13.6%,1.50240384615"
         />
       )}
-    </React.Fragment>
+    </div>
   );
 };
 

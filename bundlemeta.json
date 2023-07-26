@@ -5,15 +5,15 @@
       "isEntry": true,
       "size": 43617,
       "contents": {
-        "../../node_modules/preact/compat/dist/compat.module.js": {
-          "filePath": "../../node_modules/preact/compat/dist/compat.module.js",
+        "../../node_modules/@preact/compat/dist/compat.module.js": {
+          "filePath": "../../node_modules/@preact/compat/dist/compat.module.js",
           "size": 8444,
-          "packageName": "preact/compat"
+          "packageName": "@preact/compat"
         },
         "../../node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js": {
           "filePath": "../../node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js",
           "size": 338,
-          "packageName": "preact/compat"
+          "packageName": "@preact/compat"
         },
         "../../src/components/Header/index.jsx": { "filePath": "../../src/components/Header/index.jsx", "size": 569 },
         "../../src/components/Section/index.jsx": { "filePath": "../../src/components/Section/index.jsx", "size": 340 },

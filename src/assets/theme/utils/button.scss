@@ -5,18 +5,14 @@
 
 @mixin button-text-color($color) {
   color: $color;
-  .ball-pulse div {
-    background-color: $color !important;
-  }
-  .button__message {
-    color: $color;
-  }
 }
 
 @mixin button-text-effect($color, $states) {
   @include button-text-color(color-by-state($color, $states, base));
   &.is-disabled {
-    @include button-text-color(var(--color-#{$color}-100));
+    cursor: not-allowed;
+    opacity: 0.5;
+    @include button-text-color(var(--color-#{$color}-300));
   }
 
   &:not(.is-disabled):not(.has-image):not(.is-dropdown):active {
@@ -49,7 +45,9 @@
     background: color-by-state($color, $states, base);
   }
   &.is-disabled {
-    background: var(--color-#{$color}-100);
+    cursor: not-allowed;
+    opacity: 0.5;
+    background: var(--color-#{$color}-300);
   }
   &:not(.is-disabled):not(.has-image):not(.is-dropdown):hover {
     background: color-by-state($color, $states, hover);
@@ -66,9 +64,15 @@
   $base-index: index($color-tones, $base-tone);
   $states: (
     base: $base-tone,
-    hover: nth($color-tones, $base-index + 2),
-    focus: nth($color-tones, $base-index + 3),
+    hover: nth($color-tones, $base-index + 1),
+    focus: nth($color-tones, $base-index + 2),
   );
+
+  .button {
+    .loader {
+      color: color-by-state($color, $states, base);
+    }
+  }
 
   .button.#{$label}:not(.is-outlined):not(.is-text):not(.is-link) {
     @include filled-button($color, $states);
@@ -78,7 +82,9 @@
     @include text-button($color, $states);
     border: 1px solid var(--color-#{$color}-#{$base-tone});
     &.is-disabled {
-      border: 1px solid var(--color-#{$color}-100);
+      cursor: not-allowed;
+      opacity: 0.5;
+      border: 1px solid var(--color-#{$color}-300);
     }
   }
 
@@ -116,12 +122,24 @@ button.button {
   outline: none;
   padding: 12px 24px;
   position: relative;
-  transition-duration: var(--base-transition-timing);
-  transition-property: background-color, background, padding, color, border, border-color;
-  transition-timing-function: var(--base-transition-timing-function);
+  &:not([class*="min-w-"]) {
+    min-width: auto;
+  }
+
+  &.is-small {
+    padding: 8px 16px;
+    font-size: var(--p-2-font-size);
+  }
+  &:hover,
+  &:focus,
+  &:active {
+    transition-duration: var(--base-transition-timing);
+    transition-property: background-color, background, padding, color, border, border-color;
+    transition-timing-function: var(--base-transition-timing-function);
+  }
 }
 
-@include create-buttons(is-gray, "gray", 500);
-@include create-buttons(is-primary-light, primary, 300);
-@include create-buttons(is-primary, primary, 500);
-@include create-buttons(is-primary-dark, primary, 600);
+@include create-buttons(is-primary, "primary", 700);
+@include create-buttons(is-secondary, "secondary", 700);
+@include create-buttons(is-tertiary, "tertiary", 700);
+@include create-buttons(is-orange, "orange", 700);

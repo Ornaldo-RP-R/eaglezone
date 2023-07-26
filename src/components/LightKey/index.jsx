@@ -1,4 +1,4 @@
-import React, { useState } from "preact/compat";
+import { useState } from "preact/hooks";
 import "./index.scss";
 import { darkMode } from "../../helpers";
 
@@ -13,9 +13,6 @@ const LightKey = () => {
       }}
       className="flex items-center justify-center cursor-pointer switch-light flex-col z-10"
     >
-      <span className="font-small flex flex-col">
-        <span className="theme__title"></span>
-      </span>
       <span className="light__outer flex items-center justify-center">
         <span className="outer__button flex items-end justify-center">
           <span className="button__icon flex items-center justify-center">

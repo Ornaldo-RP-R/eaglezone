@@ -80,7 +80,8 @@ p {
   letter-spacing: var(--p-letter-spacing);
 }
 
-p.font-small {
+p.font-small,
+input {
   font-size: var(--p-2-font-size);
   line-height: var(--p-2-line-height);
   letter-spacing: var(--p-2-letter-spacing);

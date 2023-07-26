@@ -1,0 +1,17 @@
+export const SUCCESS = "SUCCESS";
+export const ERROR = "ERROR";
+export const WARNING = "WARNING";
+export const INFO = "INFO";
+export const START = "START";
+export const REGISTER = "REGISTER";
+export const OPEN_IMAGE_PREVIEW_MODAL = "OPEN_IMAGE_PREVIEW_MODAL";
+export const CLOSE_IMAGE_PREVIEW_MODAL = "CLOSE_IMAGE_PREVIEW_MODAL";
+export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
+export const REMOVE_ALERT = "REMOVE_ALERT";
+export const THROW_ALERT = "THROW_ALERT"
+export const SET_APP_LOADING = "SET_APP_LOADING";
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const UPDATE_FROM_CART = "UPDATE_FROM_CART";
+export const CHECK_AFFILIATE_CODE = "CHECK_AFFILIATE_CODE";

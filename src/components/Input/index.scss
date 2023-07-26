@@ -1,0 +1,19 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--color-secondary-900);
+  -webkit-box-shadow: 0 0 0 0 transparent inset !important;
+  background-color: transparent !important;
+  + span.label {
+    opacity: 0;
+  }
+}
+
+input {
+  label {
+    font-size: var(--p-2-font-size);
+    line-height: var(--p-2-line-height);
+  }
+  outline: none;
+}

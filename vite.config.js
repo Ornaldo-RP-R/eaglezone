@@ -63,11 +63,7 @@ export default defineConfig({
     minify: true,
     ssr: false,
     rollupOptions: {
-      output: {
-        manualChunks: {
-          preact: ["preact/compat", "preact/hooks"],
-        },
-      },
+      external: ["preact/jsx-runtime"],
     },
     commonjsOptions: {
       ignore: ["conditional-runtime-dependency"],

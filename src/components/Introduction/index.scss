@@ -53,10 +53,6 @@
 }
 
 .app__introduction {
-  padding-top: 2rem;
-  @include media-breakpoint-down(md) {
-    padding-top: 1rem;
-  }
   @include media-breakpoint-down(xl) {
     h1 {
       font-size: var(--h2-font-size);

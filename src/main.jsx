@@ -1,5 +1,12 @@
-import { render } from "preact/compat";
+import { render } from "preact";
 import { App } from "./app";
+import store from "./redux/store";
+import { Provider } from "redux-zero/preact";
 import "./main.scss";
 
-render(<App />, document.getElementById("root"));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);

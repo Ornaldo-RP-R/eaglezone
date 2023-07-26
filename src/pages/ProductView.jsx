@@ -1,6 +1,5 @@
-import React from "preact/compat";
-import Image from "../components/Image";
-import { useState, useEffect } from "preact/hooks";
+import Picture from "../components/Picture/Picture";
+import { useState } from "preact/hooks";
 import "./product-view.scss";
 import InstagramLink from "../components/InstagramLink";
 import WhatsappLink from "../components/WhatsappLink";
@@ -15,193 +14,25 @@ import instagram from "../assets/images/instagram";
 import Arrow from "../assets/images/arrow";
 import Link from "../components/Link";
 import useWindowSize from "../hooks/useWindowSize";
+import useLoadingForDyanmicRoute from "../hooks/useLoadingForDyanmicRoute";
+import fireReduxAction from "../redux/actions/fireReduxAction";
+import { ADD_TO_CART, REMOVE_FROM_CART, SUCCESS, THROW_ALERT } from "../redux/types";
+import database from "../constants";
+import { connect } from "redux-zero/preact";
 
-const products = {
-  "scout-m-red": {
-    title: "Scout-M",
-    color: "primary",
-    price: "249 €",
-    gallery: [
-      {
-        src: "scoutFrontRed.png",
-        aspectRatio: "0.55764075067",
-        zoomSizes: `desktop-big=1872,0.55764075067`,
-        zoomLevel: 0.6,
-      },
-      {
-        src: "scoutRedBack.png",
-        aspectRatio: "0.541",
-        zoomSizes: `desktop-big=1762,0.541`,
-      },
-      {
-        src: "scoutRedStretched.png",
-        aspectRatio: "1.812",
-        zoomSizes: `desktop-big=3278,1.812`,
-        imgClass: "max-w-full mx-auto rounded-r-xl w-full",
-      },
-      {
-        src: "scoutRedBottomView.png",
-        aspectRatio: "0.813",
-        zoomSizes: `desktop-big=2916,0.813`,
-      },
-      {
-        src: "scoutRedLumbar.png",
-        aspectRatio: "1.243",
-        zoomSizes: `desktop-big=4975,1.243`,
-        zoomLevel: 0.5,
-      },
-      {
-        src: "scoutRedSide.png",
-        aspectRatio: "0.558",
-        zoomSizes: `desktop-big=3349,0.558`,
-        zoomLevel: 0.7,
-      },
-      {
-        src: "scoutRedTop.png",
-        aspectRatio: "1.028",
-        zoomSizes: `desktop-big=3601,1.028`,
-        zoomLevel: 0.5,
-      },
-    ],
-    features: [
-      "I rehatshem",
-      "Ergonomike dhe Krahe 4D",
-      "Mbeshtetese per mesin dhe koken",
-      "logo me qepje",
-      "shtrihet deir 180 deg",
-      "Design unik",
-    ],
-  },
-  "scout-m-green": {
-    title: "Scout-M",
-    color: "tertiary",
-    price: "249 €",
-    gallery: [
-      {
-        src: "scoutFrontGreen.png",
-        aspectRatio: "0.55764075067",
-        zoomSizes: `desktop-big=1872,0.55764075067`,
-        zoomLevel: 0.6,
-      },
-      {
-        src: "scoutGreenBack.png",
-        aspectRatio: "0.542",
-        zoomSizes: `desktop-big=1851,0.542`,
-      },
-      {
-        src: "scoutGreenStretched.png",
-        aspectRatio: "1.808",
-        zoomSizes: `desktop-big=3468,1.808`,
-        imgClass: "max-w-full mx-auto rounded-r-xl w-full",
-      },
-      {
-        src: "scoutGreenBottomView.png",
-        aspectRatio: "0.863",
-        zoomSizes: `desktop-big=3009,0.863`,
-      },
-      {
-        src: "scoutGreenLumbar.png",
-        aspectRatio: "1.239",
-        zoomSizes: `desktop-big=3009,1.239`,
-        zoomLevel: 0.5,
-      },
-      {
-        src: "scoutGreenSide.png",
-        aspectRatio: "0.5895",
-        zoomSizes: `desktop-big=3537,0.5895`,
-      },
-      {
-        src: "scoutGreenTop.png",
-        aspectRatio: "1.136",
-        zoomSizes: `desktop-big=4098,1.136`,
-        zoomLevel: 0.6,
-      },
-    ],
-    features: [
-      "I rehatshem",
-      "Ergonomike dhe Krahe 4D",
-      "Mbeshtetese per mesin dhe koken",
-      "logo me qepje",
-      "shtrihet deir 180 deg",
-      "Design unik",
-    ],
-  },
-  "martial-m-orange": {
-    title: "Martial-M",
-    price: "395 €",
-    color: "orange",
-    gallery: [
-      {
-        src: "martial45deg.png",
-        aspectRatio: "0.57044980637",
-        zoomSizes: `desktop-big=1915,0.57044980637`,
-        zoomLevel: 0.6,
-      },
-      {
-        src: "martialBack.png",
-        aspectRatio: "0.51805555555",
-        zoomSizes: `desktop-big=1119,0.51805555555`,
-      },
-      {
-        src: "martialStretched.png",
-        aspectRatio: "1.84037015616",
-        imgClass: "max-w-full mx-auto rounded-r-xl w-full",
-        zoomSizes: `desktop-big=3182,1.84037015616`,
-        zoomLevel: 0.6,
-      },
-      {
-        src: "martialBottomView.png",
-        aspectRatio: "0.87881263616",
-        zoomSizes: `desktop-big=3227,0.87881263616`,
-        zoomLevel: 0.4,
-      },
-      {
-        src: "martialLumbar.png",
-        aspectRatio: "1.47959183673",
-        zoomSizes: `desktop-big=4495,1.47959183673`,
-        zoomLevel: 0.4,
-      },
-      {
-        src: "martialSide.png",
-        aspectRatio: "0.77306182531",
-        zoomSizes: `desktop-big=3151,0.77306182531`,
-        zoomLevel: 0.4,
-      },
-      {
-        src: "martialTop.png",
-        aspectRatio: "1.02857142857",
-        zoomSizes: `desktop-big=3276,1.02857142857`,
-        zoomLevel: 0.4,
-      },
-    ],
-    features: [
-      "Rehati gjatë gjithë ditës",
-      "Karrige premium lëkure",
-      "Ergonomike dhe Krahe 4D",
-      "Mbeshtetese per mesin dhe koken",
-      "logo me qepje",
-      "shtrihet deir 180 deg",
-      "Trashesi perfekte",
-      "Design unik",
-    ],
-  },
-};
+const ProductView = (props) => {
+  const { cartIds } = props;
+  useLoadingForDyanmicRoute();
 
-export function ProductView(props) {
-  const { setLoading } = props;
-  useEffect(() => {
-    setLoading(false);
-  }, []);
-
-  const id = new URL(window.location.href).pathname.split("/")[3];
-  const product = products[id] || {};
-  const { gallery, title, features = [], price, color } = product;
+  const urlKey = new URL(window.location.href).pathname.split("/")[3];
+  const product = database.products[urlKey] || {};
+  const { gallery, title, features = [], price, color, textClassName, fillClassName, id } = product;
   const { minTablet } = useWindowSize();
   const [selectedImage, setSelectedImage] = useState(gallery?.[0]);
   if ((gallery || []).map((g) => g?.src).indexOf(selectedImage?.src) === -1) setSelectedImage(gallery?.[0]);
   function getNextOrPrevId(direction) {
-    const keys = Object.keys(products);
-    const currentIndex = keys.indexOf(id);
+    const keys = Object.keys(database.products);
+    const currentIndex = keys.indexOf(urlKey);
     let nextIndex = direction === "next" ? currentIndex + 1 : currentIndex - 1;
     if (nextIndex < 0) nextIndex = [keys.length - 1];
     if (nextIndex >= keys.length) nextIndex = 0;
@@ -210,7 +41,7 @@ export function ProductView(props) {
 
   let nextId = getNextOrPrevId("next");
   let prevId = getNextOrPrevId("prev");
-
+  const addedToCart = cartIds.includes(id);
   return (
     price && (
       <div className="w-screen h-screen lg:py-4 rounded-r-xl flex relative flex lg:flex-row flex-col">
@@ -224,7 +55,7 @@ export function ProductView(props) {
                   selectedImage?.src === src ? "is-active" : ""
                 }`}
               >
-                <Image
+                <Picture
                   key={src}
                   hasNotPreview
                   quality={70}
@@ -238,8 +69,8 @@ export function ProductView(props) {
             );
           })}
         </div>
-        <div className="lg:h-full lg:pt-0 pt-[74px] h-[50vh] m-0 px-[25px] lg:pl-[125px] lg:min-w-[70vw] lg:max-w-[70vw] lg:w-[70vw] min-w-full max-w-full w-full rounded-r-xl flex bg-gray-800">
-          <Image
+        <div className="lg:h-full lg:pt-0 pt-[74px] h-[50svh] m-0 px-[25px] lg:pl-[125px] lg:min-w-[70svw] lg:max-w-[70svw] lg:w-[70svw] min-w-full max-w-full w-full rounded-r-xl flex bg-gray-800 dark:bg-white-800">
+          <Picture
             loading="eager"
             key={JSON.stringify(selectedImage)}
             quality={76}
@@ -254,7 +85,7 @@ export function ProductView(props) {
             zoomSizes={selectedImage?.zoomSizes}
           />
         </div>
-        <div className="flex flex-auto lg:w-[30vw]">
+        <div className="flex flex-auto lg:w-[30svw]">
           <div className="flex flex-col w-full px-6 gap-2">
             <div className="flex justify-between">
               <div className="flex">
@@ -264,7 +95,7 @@ export function ProductView(props) {
                     viewBox="0 0 32 32"
                     width="30"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="cursor-pointer my-auto mr-1 fill-white-900"
+                    className="cursor-pointer my-auto mr-1 fill-current text-white-900 dark:text-gray-900"
                   >
                     <path d="m0 14.016 2.016 1.984h4v14.016q0 .832.576 1.408t1.408.576h4v-8q0-.832.576-1.408t1.44-.576h4q.8 0 1.408.576t.576 1.408v8h4q.832 0 1.408-.576t.608-1.408v-14.016h4l1.984-1.984-16-14.016zm12 0q0-1.664 1.184-2.848t2.816-1.152 2.816 1.152 1.184 2.848-1.184 2.816-2.816 1.184-2.816-1.184-1.184-2.816z" />
                   </svg>
@@ -276,7 +107,7 @@ export function ProductView(props) {
                   </button>
                 </Link>
               </div>
-              <h6 className={`text-${color}-700 w-full text-center`}>{title}</h6>
+              <h6 className={`${textClassName || ""} w-full text-center`}>{title}</h6>
               <Link href={`shop/karrige/${nextId}`} className="flex my-auto">
                 <button role="button" aria-label="Shko ne faqen pas" className="prev h-[40px]">
                   <Arrow className="h-full" />
@@ -287,7 +118,7 @@ export function ProductView(props) {
             <ul className="flex lg:flex-col justify-between gap-4 mt-auto flex-wrap">
               {(minTablet ? features?.slice?.(0, 4) : features).map((f) => (
                 <span
-                  className="text-white-700 flex lg:w-auto lg:min-w-full lg:max-w-auto w-[346px] min-w-[40vw] max-w-full"
+                  className="text-white-700 dark:text-gray-700 flex lg:w-auto lg:min-w-full lg:max-w-auto w-[346px] min-w-[40svw] max-w-full"
                   key={f}
                 >
                   <svg
@@ -301,17 +132,29 @@ export function ProductView(props) {
                     <path
                       d="m3 10a7 7 0 0 1 9.307-6.611 1 1 0 0 0 .658-1.889 9 9 0 1 0 5.98 7.501 1 1 0 0 0 -1.988.22 7 7 0 1 1 -13.957.779zm14.75-5.338a1 1 0 0 0 -1.5-1.324l-6.435 7.28-3.183-2.593a1 1 0 0 0 -1.264 1.55l3.929 3.2a1 1 0 0 0 1.38-.113l7.072-8z"
                       fill-rule="evenodd"
-                      className={`fill-${color}-400`}
+                      className={fillClassName}
                     />
                   </svg>
                   <label className="relative top-0.5">{f}</label>
                 </span>
               ))}
             </ul>
-            <div className="flex flex-col mt-auto">
-              <p className="text-white-900 text-center relative top-5 flex gap-2 justify-center">
-                Cmimi: <h4 className="text-secondary-600 top-[-6px] relative">{price}</h4>
+            <div className="flex flex-col mt-auto items-center">
+              <p className="text-white-900 dark:text-gray-900 text-center relative flex gap-2 justify-center">
+                Cmimi:{" "}
+                <h4 className={`${textClassName} top-[-10px] relative`}>{`${price.toLocaleString("en-AL")} Lek`}</h4>
               </p>
+              <button
+                className={`button flex gap-2 is-small w-max is-${color}`}
+                onClick={() => {
+                  fireReduxAction(addedToCart ? REMOVE_FROM_CART : ADD_TO_CART, id);
+                }}
+              >
+                {addedToCart ? "Hiq nga" : "Shto ne"} shporte
+                <svg xmlns="http://www.w3.org/2000/svg" className="fill-gray-900" height={25} viewBox="0 0 256 256">
+                  <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path>
+                </svg>
+              </button>
               <span className={`mx-auto font-small font-normal mb-1 text-center top-2 relative`}>
                 Per me shume na kontaktoni :
               </span>
@@ -350,6 +193,7 @@ export function ProductView(props) {
       </div>
     )
   );
-}
+};
 
-export default ProductView;
+const mapToProps = ({ cart }) => ({ cart, cartIds: (cart || []).map((i) => i?.id) });
+export default connect(mapToProps)(ProductView);

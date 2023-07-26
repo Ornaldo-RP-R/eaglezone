@@ -1,5 +1,3 @@
-import React from "preact/compat";
-
 const ShopMain = (props) => {
   const { children, className, ...otherProps } = props;
   return (

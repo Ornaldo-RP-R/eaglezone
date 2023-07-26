@@ -1,5 +1,3 @@
-import React from "preact/compat";
-
 const Link = (props) => {
   const { children, href, onClick, ...otherProps } = props;
 

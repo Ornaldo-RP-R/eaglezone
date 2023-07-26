@@ -3,7 +3,7 @@ export default (props = {}) => (
     <path
       d="m5 8.5 7 7 7-7"
       fill="none"
-      className="stroke-white-900"
+      className="stroke-white-900 dark:stroke-gray-900"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="2"

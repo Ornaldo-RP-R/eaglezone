@@ -9,21 +9,23 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "cssnano": "^6.0.0",
-    "html-minifier-terser": "^7.1.0",
-    "postcss-preset-env": "^8.3.0",
-    "preact/compat": "^10.11.3",
-    "sass": "^1.58.3",
-    "uglify-js": "^3.17.4",
-    "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-pwa": "^0.14.7",
-    "wouter": "^2.10.1"
+    "axios": "^1.4.0",
+    "preact": "^10.16.0",
+    "react-responsive-carousel": "^3.2.23",
+    "redux-zero": "^5.1.7",
+    "wouter": "^2.11.0"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",
-    "postcss": "^8.4.21",
-    "tailwindcss": "^3.3.0",
-    "unplugin-fonts": "^1.0.0",
-    "vite": "^4.1.0"
+    "cssnano": "^6.0.1",
+    "html-minifier-terser": "^7.2.0",
+    "postcss-preset-env": "^8.5.1",
+    "sass": "^1.63.6",
+    "tailwindcss": "^3.3.2",
+    "uglify-js": "^3.17.4",
+    "unplugin-fonts": "^1.0.3",
+    "vite": "^4.3.9",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-pwa": "^0.16.4"
   }
 }
