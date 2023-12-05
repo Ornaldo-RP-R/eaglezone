@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "preact/hooks";
-import Picture from "../Picture/Picture";
+import { Picture } from "../staticComponents";
 import "./index.scss";
 
 const IntroductionChair = () => {
@@ -64,6 +64,7 @@ const IntroductionChair = () => {
           fixedWidth
           className={`introduction-chair absolute martial45deg z-10 ${!showFront ? "" : "is-hidden"}`}
           src="martial45deg.png"
+          disableFadeIn
           loading="eager"
           allowZoom
           zoomLevel={0.8}
@@ -77,6 +78,7 @@ const IntroductionChair = () => {
           quality={70}
           hasNotPreview
           fixedWidth
+          disableFadeIn
           className={`martialPillow absolute ${canStartAnimation ? "can-start-animation" : ""}`}
           src="martialPillow.png"
           onLoad={onLoadPillow}

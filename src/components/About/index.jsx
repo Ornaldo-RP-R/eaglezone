@@ -1,4 +1,4 @@
-import Section from "../Section";
+import { Section } from "../staticComponents";
 import "./index.scss";
 
 const About = () => {

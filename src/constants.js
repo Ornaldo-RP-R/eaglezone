@@ -1,31 +1,32 @@
 import { getCookie, setCookie } from "./helpers";
 
+export const windowSsr = typeof window !== 'undefined' ? window : {} 
 const database = {
   storages: {
     cookie: {
       getItem: (item) => getCookie(item),
-      removeItem: (item) => (document.cookie = item + "=; Max-Age=-7776000;"),
+      removeItem: (item) => (windowSsr.document.cookie = item + "=; Max-Age=-7776000;"),
       setItem: (key, value) => setCookie(key, value),
     },
     sessionStorage: {
-      getItem: (item) => window.sessionStorage.getItem(item),
-      removeItem: (item) => window.sessionStorage.removeItem(item),
-      setItem: (key, value) => window.sessionStorage.setItem(key, value),
+      getItem: (item) => windowSsr?.sessionStorage?.getItem?.(item),
+      removeItem: (item) => windowSsr?.sessionStorage?.removeItem?.(item),
+      setItem: (key, value) => windowSsr?.sessionStorage?.setItem?.(key, value),
     },
     localStorage: {
-      getItem: (item) => window.localStorage.getItem(item),
-      removeItem: (item) => window.localStorage.removeItem(item),
-      setItem: (key, value) => window.localStorage.setItem(key, value),
+      getItem: (item) => windowSsr?.localStorage?.getItem?.(item),
+      removeItem: (item) => windowSsr?.localStorage?.removeItem?.(item),
+      setItem: (key, value) => windowSsr?.localStorage?.setItem?.(key, value),
     },
   },
   products: {
-    1: {
-      id: 1,
+    "scout-m-red": {
+      id: "scout-m-red",
       title: "Scout-M",
       color: "primary",
       textClassName: "text-primary-700",
       fillClassName: "fill-current text-primary-400",
-      price: 28500,
+      price: 23000,
       gallery: [
         {
           src: "scoutFrontRed.png",
@@ -78,13 +79,13 @@ const database = {
         "Logo me qepje deri ne detaj",
       ],
     },
-    2: {
-      id: 2,
+    'scout-m-green': {
+      id: 'scout-m-green',
       title: "Scout-M",
       color: "tertiary",
       textClassName: "text-tertiary-700",
       fillClassName: "fill-current text-tertiary-400",
-      price: 28500,
+      price: 23000,
       gallery: [
         {
           src: "scoutFrontGreen.png",
@@ -136,10 +137,10 @@ const database = {
         "Logo me qepje deri ne detaj",
       ],
     },
-    3: {
-      id: 3,
+    'martial-m': {
+      id: 'martial-m',
       title: "Martial-M",
-      price: 42000,
+      price: 34000,
       color: "orange",
       textClassName: "text-orange-700",
       fillClassName: "fill-current text-orange-400",
@@ -199,7 +200,7 @@ const database = {
       ],
     },
   },
-  baseURL: "http://api.menaxhimbiznesi.com/api/",
+  baseURL: "https://api.menaxhimbiznesi.com/api/",
   roles: {
     Admin: 1,
     User: 2,

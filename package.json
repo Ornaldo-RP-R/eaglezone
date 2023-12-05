@@ -4,28 +4,40 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node server",
     "build": "vite build",
-    "preview": "vite preview"
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --outDir dist/server --ssr /src/entry-server.jsx"
   },
   "dependencies": {
     "axios": "^1.4.0",
-    "preact": "^10.16.0",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "preact": "^10.19.2",
+    "preact-render-to-string": "^6.3.1",
     "react-responsive-carousel": "^3.2.23",
     "redux-zero": "^5.1.7",
-    "wouter": "^2.11.0"
+    "url": "^0.11.3",
+    "wouter-preact": "^2.12.2"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.5.0",
+    "@babel/core": "^7.23.5",
+    "@preact/preset-vite": "^2.7.0",
+    "@rollup/plugin-terser": "^0.4.3",
+    "autoprefixer": "^10.4.16",
+    "cross-env": "^7.0.3",
     "cssnano": "^6.0.1",
     "html-minifier-terser": "^7.2.0",
-    "postcss-preset-env": "^8.5.1",
+    "postcss": "^8.4.32",
+    "postcss-preset-env": "^9.3.0",
+    "rollup-plugin-analyzer": "^4.0.0",
     "sass": "^1.63.6",
     "tailwindcss": "^3.3.2",
-    "uglify-js": "^3.17.4",
-    "unplugin-fonts": "^1.0.3",
-    "vite": "^4.3.9",
+    "vite": "^5.0.4",
     "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-pwa": "^0.16.4"
+    "vite-plugin-pwa": "^0.17.2",
+    "workbox-build": "^7.0.0",
+    "workbox-window": "^7.0.0"
   }
 }

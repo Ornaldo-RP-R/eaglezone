@@ -1,9 +1,7 @@
 import { useEffect, useState } from "preact/hooks";
 import apiActions from "../redux/actions/apiActions";
-import Section from "../components/Section";
-import Input from "../components/Input/Input";
-import Submit from "../components/Submit/Submit";
-import { copyToClipboard } from "../helpers";
+import { Submit, Section, Input } from "../components/staticComponents";
+import { copyToClipboard, priceIn } from "../helpers";
 import fireReduxAction from "../redux/actions/fireReduxAction";
 import { INFO, THROW_ALERT } from "../redux/types";
 
@@ -14,8 +12,25 @@ const Profili = () => {
   const [affiliateOrders, setAffiliateOrders] = useState([]);
   const [viewers, setViewers] = useState(0);
 
-  const statusCounts = (affiliateOrders || []).reduce((acc, order) => {
-    acc[order?.Status] = (acc[order?.Status] || 0) + 1;
+  const statusDetails = (affiliateOrders || []).reduce((acc, order) => {
+    const { Status, AffiliateCost, TotalPrice, OrderItems } = order;
+
+    if (!acc[Status]) {
+      acc[Status] = {
+        count: 0,
+        totalOrders: 0,
+        totalPriceOfOrders: 0,
+        totalAffiliateCost: 0,
+        totalTotalPrice: 0,
+      };
+    }
+
+    acc[Status].count += 1;
+    acc[Status].totalOrders += OrderItems?.length || 0;
+    acc[Status].totalPriceOfOrders += OrderItems?.reduce((sum, item) => sum + item.Price, 0) || 0;
+    acc[Status].totalAffiliateCost += AffiliateCost;
+    acc[Status].totalTotalPrice += TotalPrice;
+
     return acc;
   }, {});
 
@@ -38,7 +53,7 @@ const Profili = () => {
       .onSuccess(() => {})
       .finally(() => setIsSaving(false));
   };
-  const linkToShare = `${window.location.origin}/code=${affiliateLink?.Code}`;
+  const linkToShare = `${window.location.origin}/?code=${affiliateLink?.Code}`;
   return (
     <Section className="app__profili">
       <div className="flex flex-col gap-4">
@@ -66,13 +81,29 @@ const Profili = () => {
                     key={key}
                     className="border-r last:border-none border-gray-300 py-2 px-4 bg-white text-gray-800 font-medium text-center"
                   >
-                    {statusCounts[key] || 0}
+                    {statusDetails?.[key]?.count || 0}
                   </td>
                 ))}
               </tr>
             </tbody>
           </table>
         </div>
+        {statusDetails?.Delivered?.totalPriceOfOrders && (
+          <p className="is-small">
+            Totali i porosive te perfunduara {priceIn(statusDetails?.Delivered?.totalPriceOfOrders || 0, "lek")}
+          </p>
+        )}
+        {statusDetails?.Delivered?.totalAffiliateCost ? (
+          <p className="flex">
+            Perfitimi si affiliate:
+            <p className="text-tertiary-700">{priceIn(statusDetails?.Delivered?.totalAffiliateCost || 0, "lek")}</p>
+          </p>
+        ) : (
+          <span className="is-small text-secondary-700 w-max p-2 rounded-lg bg-gray-800 dark:bg-white-800">
+            Perfitimi nga porosite kalkulohet ne momentin qe ato dorezohen tek klinetet, deri tani nuk keni asnje porosi
+            te dorezuar
+          </span>
+        )}
 
         <div className="flex flex-col gap-2 mt-6">
           <div className="flex gap-4">

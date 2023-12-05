@@ -1,6 +1,6 @@
-import Picture from "../../components/Picture/Picture";
+import { Picture } from "../../components/staticComponents";
 import { Carousel } from "react-responsive-carousel";
-import useLoadingForDyanmicRoute from "../../hooks/useLoadingForDyanmicRoute";
+import { useLoadingForDyanmicRoute } from "../../components/staticComponents";
 
 const LoginCarousel = () => {
   useLoadingForDyanmicRoute();

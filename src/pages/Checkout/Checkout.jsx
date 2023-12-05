@@ -1,13 +1,11 @@
 import { useState } from "preact/hooks";
-import Section from "../../components/Section";
 import { priceIn, useStateAndUpdateRef, useStatelessOf } from "../../helpers";
-import useLoadingForDyanmicRoute from "../../hooks/useLoadingForDyanmicRoute";
 import { Email, Emer, EmerKompanie, Fjalekalim, Mbiemer, Note, Phone, Qyteti, Rruga, ZipCode } from "./Inputs";
 import { stateNamings } from "./constants";
 import { Fragment } from "preact";
 import { connect } from "redux-zero/preact";
 import database from "../../constants";
-import Picture from "../../components/Picture/Picture";
+import { Picture, Section, useLoadingForDyanmicRoute } from "../../components/staticComponents";
 import PlaceOrder from "../../components/PlaceOrder/PlaceOrder";
 import fireReduxAction from "../../redux/actions/fireReduxAction";
 import { REMOVE_FROM_CART, UPDATE_FROM_CART } from "../../redux/types";

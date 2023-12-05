@@ -56,12 +56,12 @@ const Footer = () => {
         </EmailLink>
       </div>
       <img
-        src="https://ttatente.sirv.com/logo.svg"
+        src="https://api.menaxhimbiznesi.com/api/File/Retrieve?file=logo.svg"
         alt="Logo e Eeagle Zone Gaming Albania"
         className="lg:h-[170px] sm:h-[150px] h-[120px] logo sm:top-[-1px] top-[15px]  left-[5px] absolute"
       />
       <img
-        src="https://ttatente.sirv.com/logo.svg"
+        src="https://api.menaxhimbiznesi.com/api/File/Retrieve?file=logo.svg"
         alt="Logo e Eeagle Zone Gaming Albania"
         className="lg:h-[170px] sm:h-[150px] h-[120px] sm:top-[-26px] top-[-1px] logo is-right right-[5px] absolute"
       />
@@ -71,11 +71,10 @@ const Footer = () => {
 };
 
 export const Social = (props) => {
-  const { href, Icon, className, title, description, type } = props;
+  const { Icon, className, title, description, type } = props;
   return (
     <div className="flex flex-col items-center gap-[4px] social m-auto h-auto overflow-visible">
       <div
-        href={href}
         className={`social__circle is--${type} lg:w-[55px] lg:h-[55px] w-[50px] h-[50px] lg:min-w-[55px] lg:max-h-[55px] min-w-[50px] max-h-[50px] lg:max-w-[55px] lg:min-h-[55px] max-w-[50px] min-h-[50px] overflow-visible`}
       >
         <Icon className={`text-primary-50 ${className || "lg:w-[30px] w-[28px] h-auto"}`} />

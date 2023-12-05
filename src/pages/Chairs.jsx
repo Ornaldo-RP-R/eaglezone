@@ -6,8 +6,7 @@ const Chairs = () => {
   return (
     <Fragment>
       <Product
-        href="shop/karrige/3"
-        aria-label="Shiko karrigen gaming Martial M"
+        href="karrige-gaming-zyre/martial-m"
         title="Shiko Martial tani"
         color="orange"
         src="martial45deg.png"
@@ -15,8 +14,7 @@ const Chairs = () => {
         sizes="desktop-big=20%,0.57044980637;tablet=100%,0.57044980637"
       />
       <Product
-        href="shop/karrige/1"
-        aria-label="Shiko karrigen gaming Scout M"
+        href="karrige-gaming-zyre/scout-m-red"
         color="red"
         title="Shiko Scout tani"
         src="scoutFrontRed.png"
@@ -25,8 +23,7 @@ const Chairs = () => {
       />
       <Product
         isLast
-        href="shop/karrige/2"
-        aria-label="Shiko karrigen gaming Scout M"
+        href="karrige-gaming-zyre/scout-m-green"
         color="green"
         title="Shiko Scout tani"
         src="scoutFrontGreen.png"

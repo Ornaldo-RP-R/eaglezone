@@ -1,22 +1,23 @@
 import { copyToClipboard, isDeviceTouchable } from "../../helpers";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const InstagramLink = (props) => {
   const { children, instagramName } = props;
-  const onClick = (e) => {
-    e.preventDefault();
-    copyToClipboard(instagramName);
-    window.open(
-      isDeviceTouchable() ? `instagram://user?username=${instagramName}` : `https://www.instagram.com/${instagramName}/`
-    );
-  };
+  const { isMobile } = useWindowSize();
+
+  const onClick = () => copyToClipboard(instagramName);
   return (
     <a
-      href="#"
-      aria-label={`Na vizito ne faqen tone te instagramit me emer ${instagramName}`}
-      target="_blank"
-      onClick={onClick}
+      href={
+        isDeviceTouchable()
+          ? `instagram://user?username=${instagramName}`
+          : `https://www.instagram.com/${instagramName}/`
+      }
+      target="blank"
     >
-      {children}
+      <button type="button" aria-label={isMobile ? "Vizitoni instagramin tonë" : undefined} onClick={onClick}>
+        {children}
+      </button>
     </a>
   );
 };

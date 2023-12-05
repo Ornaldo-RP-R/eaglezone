@@ -3,19 +3,19 @@
   "short_name": "Eagle Zone",
   "icons": [
     {
-      "src": "https://weedeand.sirv.com/logo.png?w=196&h=196",
+      "src": "https://api.menaxhimbiznesi.com/api/File/Retrieve?file=logo.png&width=196&height=196&quality=85",
       "sizes": "196x196",
       "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "https://weedeand.sirv.com/logo.png?w=196&h=196",
+      "src": "https://api.menaxhimbiznesi.com/api/File/Retrieve?file=logo.png&width=196&height=196&quality=85",
       "sizes": "196x196",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "https://weedeand.sirv.com/splash.png?w=512&h=512",
+      "src": "https://api.menaxhimbiznesi.com/api/File/Retrieve?file=splash.png&width=512&height=512&quality=85",
       "sizes": "512x512",
       "type": "image/png"
     }
@@ -27,13 +27,13 @@
       "background_color": "#cd2014",
       "icons": [
         {
-          "src": "https://weedeand.sirv.com/logo.png?w=196&h=196",
+          "src": "https://api.menaxhimbiznesi.com/api/File/Retrieve?file=logo.png&width=196&height=196&quality=85",
           "sizes": "196x196",
           "type": "image/png",
           "purpose": "maskable any"
         },
         {
-          "src": "https://weedeand.sirv.com/logo.png?w=196&h=196",
+          "src": "https://api.menaxhimbiznesi.com/api/File/Retrieve?file=logo.png&width=196&height=196&quality=85",
           "sizes": "196x196",
           "type": "image/png",
           "purpose": "maskable"
@@ -41,7 +41,7 @@
       ]
     }
   },
-  "start_url": "/",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#141414",
   "theme_color": "#cd2014",

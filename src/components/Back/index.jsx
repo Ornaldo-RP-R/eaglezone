@@ -1,4 +1,4 @@
-import Picture from "../Picture/Picture";
+import { Picture } from "../staticComponents";
 import { useState, useEffect, useRef } from "preact/hooks";
 import "./index.scss";
 import Arrow from "../../assets/images/arrow";
@@ -39,7 +39,7 @@ const Back = () => {
 
   return (
     <div ref={containerRef} className="flex flex-col chair-back">
-      <button role="button" aria-label="Shko ne faqen mbrapa" className="prev" onClick={() => changeImage("prev")}>
+      <button type="button" aria-label="Shko ne faqen mbrapa" className="prev" onClick={() => changeImage("prev")}>
         <Arrow className="min-h-[50px]" />
       </button>
       <div className="flex relative h-full">
@@ -62,12 +62,7 @@ const Back = () => {
           sizes="desktop-big=100%,1.77777777778;tablet-big=1500,1.77777777778"
         />
       </div>
-      <button
-        role="button"
-        aria-label="Shko ne faqen pas , pra faqen tjeter"
-        className="next"
-        onClick={() => changeImage("next")}
-      >
+      <button type="button" aria-label="Shko ne faqen pas" className="next" onClick={() => changeImage("next")}>
         <Arrow className="min-h-[50px]" />
       </button>
     </div>

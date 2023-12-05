@@ -1,6 +1,6 @@
 import { Fragment } from "preact";
 import "./index.scss";
-import Field from "../Field/Field";
+import { Field } from "../staticComponents";
 
 const Input = (props) => {
   const {

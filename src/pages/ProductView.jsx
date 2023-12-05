@@ -1,4 +1,4 @@
-import Picture from "../components/Picture/Picture";
+import { Picture, useLoadingForDyanmicRoute } from "../components/staticComponents";
 import { useState } from "preact/hooks";
 import "./product-view.scss";
 import InstagramLink from "../components/InstagramLink";
@@ -12,19 +12,18 @@ import gmail from "../assets/images/gmail";
 import whatsapp from "../assets/images/whatsapp";
 import instagram from "../assets/images/instagram";
 import Arrow from "../assets/images/arrow";
-import Link from "../components/Link";
 import useWindowSize from "../hooks/useWindowSize";
-import useLoadingForDyanmicRoute from "../hooks/useLoadingForDyanmicRoute";
 import fireReduxAction from "../redux/actions/fireReduxAction";
-import { ADD_TO_CART, REMOVE_FROM_CART, SUCCESS, THROW_ALERT } from "../redux/types";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "../redux/types";
 import database from "../constants";
 import { connect } from "redux-zero/preact";
+import { Link } from "wouter-preact";
 
 const ProductView = (props) => {
   const { cartIds } = props;
   useLoadingForDyanmicRoute();
 
-  const urlKey = new URL(window.location.href).pathname.split("/")[3];
+  const urlKey = new URL(window.location.href).pathname.split("/")[4];
   const product = database.products[urlKey] || {};
   const { gallery, title, features = [], price, color, textClassName, fillClassName, id } = product;
   const { minTablet } = useWindowSize();
@@ -89,33 +88,41 @@ const ProductView = (props) => {
           <div className="flex flex-col w-full px-6 gap-2">
             <div className="flex justify-between">
               <div className="flex">
-                <Link href="" className="flex my-auto" aria-label="Shko ne fillim te faqes">
-                  <svg
-                    height="30"
-                    viewBox="0 0 32 32"
-                    width="30"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="cursor-pointer my-auto mr-1 fill-current text-white-900 dark:text-gray-900"
-                  >
-                    <path d="m0 14.016 2.016 1.984h4v14.016q0 .832.576 1.408t1.408.576h4v-8q0-.832.576-1.408t1.44-.576h4q.8 0 1.408.576t.576 1.408v8h4q.832 0 1.408-.576t.608-1.408v-14.016h4l1.984-1.984-16-14.016zm12 0q0-1.664 1.184-2.848t2.816-1.152 2.816 1.152 1.184 2.848-1.184 2.816-2.816 1.184-2.816-1.184-1.184-2.816z" />
-                  </svg>
+                <Link href="/">
+                  <a className="flex my-auto">
+                    <button type="button" aria-label="Shko ne fillim te faqes">
+                      <svg
+                        height="30"
+                        viewBox="0 0 32 32"
+                        width="30"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="cursor-pointer my-auto mr-1 fill-current text-white-900 dark:text-gray-900"
+                      >
+                        <path d="m0 14.016 2.016 1.984h4v14.016q0 .832.576 1.408t1.408.576h4v-8q0-.832.576-1.408t1.44-.576h4q.8 0 1.408.576t.576 1.408v8h4q.832 0 1.408-.576t.608-1.408v-14.016h4l1.984-1.984-16-14.016zm12 0q0-1.664 1.184-2.848t2.816-1.152 2.816 1.152 1.184 2.848-1.184 2.816-2.816 1.184-2.816-1.184-1.184-2.816z" />
+                      </svg>
+                    </button>
+                  </a>
                 </Link>
 
-                <Link href={`shop/karrige/${prevId}`} className="flex my-auto">
-                  <button role="button" aria-label="Shko ne faqen mbrapa" className="next h-[40px]">
-                    <Arrow className="h-full" />
-                  </button>
+                <Link href={prevId}>
+                  <a className="flex my-auto">
+                    <button type="button" aria-label="Shko ne faqen mbrapa" className="next h-[40px]">
+                      <Arrow className="h-full" />
+                    </button>
+                  </a>
                 </Link>
               </div>
               <h6 className={`${textClassName || ""} w-full text-center`}>{title}</h6>
-              <Link href={`shop/karrige/${nextId}`} className="flex my-auto">
-                <button role="button" aria-label="Shko ne faqen pas" className="prev h-[40px]">
-                  <Arrow className="h-full" />
-                </button>
+              <Link href={nextId}>
+                <a className="flex my-auto">
+                  <button type="button" aria-label="Shko ne faqen pas" className="prev h-[40px]">
+                    <Arrow className="h-full" />
+                  </button>
+                </a>
               </Link>
             </div>
 
-            <ul className="flex lg:flex-col justify-between gap-4 mt-auto flex-wrap">
+            <div className="flex lg:flex-col justify-between gap-4 mt-auto flex-wrap">
               {(minTablet ? features?.slice?.(0, 4) : features).map((f) => (
                 <span
                   className="text-white-700 dark:text-gray-700 flex lg:w-auto lg:min-w-full lg:max-w-auto w-[346px] min-w-[40svw] max-w-full"
@@ -138,13 +145,14 @@ const ProductView = (props) => {
                   <label className="relative top-0.5">{f}</label>
                 </span>
               ))}
-            </ul>
+            </div>
             <div className="flex flex-col mt-auto items-center">
               <p className="text-white-900 dark:text-gray-900 text-center relative flex gap-2 justify-center">
                 Cmimi:{" "}
                 <h4 className={`${textClassName} top-[-10px] relative`}>{`${price.toLocaleString("en-AL")} Lek`}</h4>
               </p>
               <button
+                type="button"
                 className={`button flex gap-2 is-small w-max is-${color}`}
                 onClick={() => {
                   fireReduxAction(addedToCart ? REMOVE_FROM_CART : ADD_TO_CART, id);

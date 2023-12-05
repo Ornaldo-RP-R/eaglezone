@@ -6,7 +6,7 @@ import database from "../../constants";
 import apiActions from "../../redux/actions/apiActions";
 import fireReduxAction from "../../redux/actions/fireReduxAction";
 import { INFO, REMOVE_FROM_CART, THROW_ALERT } from "../../redux/types";
-import { navigate } from "wouter/use-location";
+import { navigate } from "wouter-preact/use-location";
 import useWindowSize from "../../hooks/useWindowSize";
 
 const PlaceOrder = (props) => {
@@ -46,28 +46,25 @@ const PlaceOrder = (props) => {
     })),
   });
 
-  const createOrder = () => apiActions.createOrder(createOrderParams());
-  const registerAndCreateOrder = () => {
-    const params = {
+  const createOrder = () => {
+    const registerParam = {
       Firstname: getEmer(),
       Lastname: getMbiemer(),
       Username: getEmail(),
       Password: getFjalekalim(),
-      ConfirmPassword: getFjalekalim(),
       Email: getEmail(),
       Phone: getPhone(),
-      RoleId: 0,
-      Order: createOrderParams(),
     };
-    return apiActions.register(params);
+    let params = createOrderParams();
+    if (!userToken) params.Register = registerParam;
+    return apiActions.createOrder(params);
   };
 
   const handleClick = () => {
     let order = document.querySelector(".order");
     order?.classList?.add?.("animate");
 
-    const startCreating = userToken ? createOrder : registerAndCreateOrder;
-    startCreating()
+    createOrder()
       .onSuccess(() => {
         cart.forEach((item) => fireReduxAction(REMOVE_FROM_CART, item?.id));
         navigate("/");
@@ -78,6 +75,7 @@ const PlaceOrder = (props) => {
   const { minTablet } = useWindowSize();
   return (
     <button
+      type="button"
       className={`${isDisabled ? "is-disabled" : ""} order button is-primary w-full ${
         minTablet ? "min-w-full" : "ml-auto"
       }`}

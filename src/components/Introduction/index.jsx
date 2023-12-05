@@ -1,7 +1,6 @@
 import { useState } from "preact/hooks";
 import { Fragment } from "preact/compat";
-import Picture from "../Picture/Picture";
-import Section from "../../components/Section";
+import { Picture, Section } from "../staticComponents";
 import Header from "../../components/Header";
 import IntroductionChair from "../../components/IntroductionChair";
 import "./index.scss";
@@ -69,7 +68,7 @@ const Introduction = () => {
             src="ceilingLamp.png"
             loading="eager"
             alt="Llampa per te nderuar light ose dark mode e web"
-            sizes="desktop-big=350,0.46622516556;mobile=100,0.46622516556"
+            sizes="desktop-big=300,0.46622516556;desktop-big=280,0.46622516556;tablet-big=250,0.46622516556;mobile=100,0.46622516556"
           />
           {lampLoaded && (
             <Fragment>
@@ -81,7 +80,7 @@ const Introduction = () => {
       </div>
       <IntroductionChair />
       <Header />
-      <h1 className="mt-auto pb-4 max-w-[900px] z-10">
+      <h1 className="mt-auto pb-4 max-w-[930px] z-10">
         <span>SHIJO</span> <span>EKSPERIENCEN</span> <span>E RE</span> <span>TE PRODUKTEVE GAMING</span>
       </h1>
       <p className="text md:pb-24 text-gray-400 dark:text-white-400 lg:max-w-[585px] md:max-w-[380px] max-w-full font-small z-10">

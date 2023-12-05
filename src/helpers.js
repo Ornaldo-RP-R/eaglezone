@@ -1,4 +1,5 @@
 import { useReducer, useRef, useEffect } from "preact/hooks";
+import { windowSsr } from "./constants";
 
 export function isDeviceTouchable() {
  return ('ontouchstart' in document.documentElement);
@@ -17,7 +18,6 @@ export const email = "eagelzoneal@gmail.com";
 export const phone = 355675386361
 export const facebookName = "Eagle-Zone-Albania";
 export const instagramName = 'eagle_zone_gaming';
-export const darkMode = JSON.parse(sessionStorage.getItem("Eagle-Zone-Dark-Mode") || "true");
 
 const reducer = (state, action) => {
   const { type, name, value } = action || {};
@@ -82,7 +82,7 @@ export const generateUniqueId = (() => {
 
 export function getCookie(cname) {
   const name = cname + "=";
-  const decodedCookie = decodeURIComponent(document.cookie);
+  const decodedCookie = decodeURIComponent(windowSsr?.document?.cookie);
   const ca = decodedCookie.split(";");
   for (let i = 0; i < ca.length; i++) {
     let c = ca[i];

@@ -23,20 +23,28 @@ const onError = (err) => {
   return modifyResponse(response);
 };
 
+const getConfigs = () => ({
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "*/*",
+    Authorization: `Bearer ${store?.getState?.()?.user?.Token}`,
+  },
+  timeout: 5000,
+});
+
 export const httpInstance = {
   instance: null,
-  useInterceptors(contentType = "application/json; charset=utf-8") {
+  useInterceptors() {
     this.instance.interceptors.request.use((config) => {
-      const Authorization = `Bearer ${store?.getState?.()?.user?.Token}`;
-      config.headers = { "Content-Type": contentType, ...(Authorization ? {Authorization} : {}) };
+      config = { ...(config || {}), ...getConfigs() };
       return config;
     });
     this.instance.interceptors.response.use(modifyResponse, onError);
   },
-  create(configs, contentType = "application/json; charset=utf-8") {
+  create(configs, contentType = "application/json") {
     const {route} = configs || {}
     const baseURL = `${database.baseURL}${route}`;
-    this.instance = axios.create({ baseURL });
+    this.instance = axios.create({ baseURL, ...getConfigs() });
     this.useInterceptors(contentType);
     return this.instance;
   },
@@ -68,8 +76,7 @@ export const apiCallback =
       this.promise
         .then((res) => {
           const { type, response } = res || {};
-          const { data: errMessage } = response || {};
-          const {Errors} = errMessage || {};
+          const { data: errMessage, Errors } = response || {};
           const errorMessages = Errors?.length && Errors.join(`\n`);
           const defaultMessage = "Oooops dicka shkoi keq!"
           const message = errorMessages || errMessage || defaultMessage;

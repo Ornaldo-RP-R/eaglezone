@@ -1,8 +1,8 @@
 import LightKey from "../LightKey";
-import { Link } from "wouter";
+import { Link } from "wouter-preact";
 import "./index.scss";
 import { connect } from "redux-zero/preact";
-import Dropdown from "../Dropdown/Dropdown";
+import { Dropdown } from "../staticComponents";
 import fireReduxAction from "../../redux/actions/fireReduxAction";
 import { LOGOUT } from "../../redux/types";
 import database from "../../constants";
@@ -12,33 +12,39 @@ const Header = (props) => {
 
   return (
     <header className="flex justify-between">
-      <Link href="/" aria-label="Shko tek fillimi i faqes">
-        <div className="z-10 cursor-pointer flex h-max">{logo}</div>
+      <Link href="/">
+        <a>
+          <button type="button" className="z-10 cursor-pointer flex h-max" aria-label="Shko tek fillimi i faqes">
+            {logo}
+          </button>
+        </a>
       </Link>
       <LightKey />
 
       {!onShop && (
         <div className="z-10 flex gap-4 h-max pl-4 relative flex items-center">
           {!user?.UserId ? (
-            <Link href="login" aria-label="Shko tek faqja e regjistrimit">
-              <button className="w-[60px] flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  className="mr-2"
-                  viewBox="0 0 24 24"
-                >
-                  <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
-                  <path d="M7 11V7a5 5 0 0 1 9.9-1" />
-                </svg>
-                <span className="font-small">HYR</span>
-              </button>
+            <Link href="/hyr">
+              <a>
+                <button type="button" className="w-[60px] flex items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    className="mr-2"
+                    viewBox="0 0 24 24"
+                  >
+                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 9.9-1" />
+                  </svg>
+                  <span className="font-small">HYR</span>
+                </button>
+              </a>
             </Link>
           ) : (
             <Dropdown
@@ -55,7 +61,9 @@ const Header = (props) => {
                 {user?.RoleId === database.roles.AffiliateSeller && (
                   <li className="cursor-pointer">
                     <Link href="/profili">
-                      <span>Profili</span>
+                      <a>
+                        <button type="button">Profili</button>
+                      </a>
                     </Link>
                   </li>
                 )}
@@ -105,8 +113,12 @@ const Header = (props) => {
               </div>
             </Dropdown>
           )}
-          <Link href="shop/karrige" aria-label="Shko tek faqja e dyqanit / shop-it">
-            <p className="cursor-pointer font-small shop-btn cursor-pointer mt-1">SHOP</p>
+          <Link href="/gaming/aksesore/karrige-gaming-zyre">
+            <a>
+              <button type="button" className="cursor-pointer font-small shop-btn cursor-pointer mt-1">
+                BLEJ
+              </button>
+            </a>
           </Link>
         </div>
       )}
@@ -116,11 +128,11 @@ const Header = (props) => {
 
 export const logo = (
   <img
-    src="https://ttatente.sirv.com/logo.svg"
+    src="https://api.menaxhimbiznesi.com/api/File/Retrieve?file=logo.svg"
     alt="Logo e Eeagle Zone Gaming Albania"
     height="100"
-    width="100"
-    className="md:h-[100px] h-[70px] md:w-[100px] w-[70px] cursor-pointer"
+    width="87.333333377"
+    className="md:h-[100px] h-[70px] md:w-[87.333333377px] w-[61.1333333325px] cursor-pointer"
   />
 );
 

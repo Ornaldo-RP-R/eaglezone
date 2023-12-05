@@ -1,4 +1,4 @@
-import Input from "../../components/Input/Input";
+import { Input } from "../../components/staticComponents";
 import { stateNamings } from "./constants";
 import { useStateAndUpdateRef } from "../../helpers";
 import { useEffect } from "preact/hooks";
@@ -88,9 +88,10 @@ export const Phone = (props) => {
   );
 };
 
-function validatePhoneNumber(phoneNumber) {
-  const albanianRegex = /^((\+|00)355|0)6[789][0-9]{7}$/;
-  return albanianRegex.test(phoneNumber);
+export function validatePhoneNumber(phoneNumber) {
+  const internationalRegex =
+    /^((\+|00)(355|383|389|382|30)|0)([67][0-9]{7}|[69][0-9]{7}|[67][0-9]{6}|[69][0-9]{6}|[67][0-9]{8}|[69][0-9]{8}|[2-9][0-9]{7})$/;
+  return internationalRegex.test(phoneNumber);
 }
 
 export const Fjalekalim = (props) => {

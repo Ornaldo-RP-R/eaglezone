@@ -5,6 +5,7 @@
   span.text {
     transform: scale(0.94);
     will-change: transform;
+    transform-origin: top left;
     animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
 
     span {
@@ -39,7 +40,10 @@
     }
   }
   @keyframes scale {
-    100% {
+    from {
+      transform: scale(0.94);
+    }
+    to {
       transform: scale(1);
     }
   }

@@ -4,7 +4,7 @@ import Quality from "../components/Quality";
 import Back from "../components/Back";
 import Footer from "../components/Footer";
 import About from "../components/About";
-import useLoadingForDyanmicRoute from "../hooks/useLoadingForDyanmicRoute";
+import { useLoadingForDyanmicRoute } from "../components/staticComponents";
 
 export function Home() {
   useLoadingForDyanmicRoute();

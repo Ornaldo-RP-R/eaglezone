@@ -1,6 +1,6 @@
 import { useState } from "preact/hooks";
-import Picture from "../Picture/Picture";
-import Section from "../../components/Section";
+import { Picture } from "../staticComponents";
+import { Section } from "../staticComponents";
 import "./index.scss";
 import useWindowSize from "../../hooks/useWindowSize";
 
@@ -65,8 +65,8 @@ const Circle = (props) => {
   const { color, className, setColor, isActive } = props;
   return (
     <button
-      role="button"
-      aria-label="Zgjidh ngjyren e Scout M jeshile ose te gjelber ose te kuqe"
+      type="button"
+      aria-label={`ndero ngjyren ne ${color}`}
       onClick={() => setColor(color)}
       className={`color__circle cursor-pointer ${isActive ? "is--active" : ""} rounded-[50%] ${
         className || ""

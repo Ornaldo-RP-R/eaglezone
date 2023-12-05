@@ -28,6 +28,7 @@ const Alert = (props) => {
               </div>
 
               <button
+                type="button"
                 className="alert__close cursor-pointer inline-flex items-center justify-center p-0"
                 onClick={close}
               >

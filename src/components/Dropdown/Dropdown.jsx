@@ -2,7 +2,7 @@ import { useEffect, useRef } from "preact/hooks";
 import { useStateAndUpdateRef, useStatelessOf } from "../../helpers";
 import "./index.scss";
 import { Fragment } from "preact";
-import Field from "../Field/Field";
+import { Field } from "../staticComponents";
 
 const Dropdown = (props) => {
   const {

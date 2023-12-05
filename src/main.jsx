@@ -1,12 +1,12 @@
-import { render } from "preact";
 import { App } from "./app";
 import store from "./redux/store";
 import { Provider } from "redux-zero/preact";
 import "./main.scss";
 
-render(
+const Main = () => (
   <Provider store={store}>
     <App />
-  </Provider>,
-  document.getElementById("root")
+  </Provider>
 );
+
+export default Main;

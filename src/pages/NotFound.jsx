@@ -1,5 +1,5 @@
-import useLoadingForDyanmicRoute from "../hooks/useLoadingForDyanmicRoute";
-import { Link } from "wouter";
+import { useLoadingForDyanmicRoute } from "../components/staticComponents";
+import { Link } from "wouter-preact";
 import useWindowSize from "../hooks/useWindowSize";
 
 const NotFound = () => {
@@ -10,24 +10,31 @@ const NotFound = () => {
       <div className="flex-1 min-h-full bg-gray-900 min-w-full rounded-3xl shadow-xl p-8 lg:p-16 text-gray-800 relative lg:flex items-center text-center lg:text-left">
         <div className="w-full lg:w-1/2">
           <div className="mb-10 lg:mb-20 text-gray-600 font-light">
-            <h1 className="font-black uppercase text-3xl lg:text-4xl text-orange-500 mb-10">Me duket se keni humbur!</h1>
+            <h1 className="font-black uppercase text-3xl lg:text-4xl text-orange-500 mb-10">
+              Me duket se keni humbur!
+            </h1>
             {!minTablet && <p className="font-small mb-1">Faqja qe kerkon nuk eshte e mundur te aksesohet.</p>}
             {!minTablet && <p className="font-small">Kerko faqe tjeter ose kliko butonin qe te shkosh mbrapa.</p>}
           </div>
           <div className="mb-20 lg:mb-0">
             <Link href="/">
-              <button className="inline-flex items-center text-md font-semibold outline-none focus:outline-none transform transition-all hover:scale-110 text-orange-800 hover:text-orange-900">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  className="fill-orange-900 h-full cursor-pointer mr-1"
-                  viewBox="0 0 256 256"
+              <a>
+                <button
+                  type="button"
+                  className="inline-flex items-center text-md font-semibold outline-none focus:outline-none transform transition-all hover:scale-110 text-orange-800 hover:text-orange-900"
                 >
-                  <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48-88a8,8,0,0,1-8,8H107.31l18.35,18.34a8,8,0,0,1-11.32,11.32l-32-32a8,8,0,0,1,0-11.32l32-32a8,8,0,0,1,11.32,11.32L107.31,120H168A8,8,0,0,1,176,128Z"></path>
-                </svg>
-                <p>Shko Mbrapa</p>
-              </button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    className="fill-orange-900 h-full cursor-pointer mr-1"
+                    viewBox="0 0 256 256"
+                  >
+                    <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48-88a8,8,0,0,1-8,8H107.31l18.35,18.34a8,8,0,0,1-11.32,11.32l-32-32a8,8,0,0,1,0-11.32l32-32a8,8,0,0,1,11.32,11.32L107.31,120H168A8,8,0,0,1,176,128Z"></path>
+                  </svg>
+                  <p>Shko Mbrapa</p>
+                </button>
+              </a>
             </Link>
           </div>
         </div>

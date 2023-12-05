@@ -52,7 +52,7 @@
   transition: all 200ms ease-in-out;
 
   &__icon:after {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
     line-height: 16px;
     height: 16px;
@@ -69,8 +69,8 @@
 }
 
 .alert > .alert__border {
-  animation: timer 0.5s linear;
-  transition: all 0.5s ease-in-out;
+  animation: timer 0.7s linear;
+  transition: all 0.7s ease-in-out;
   will-change: width;
   margin: 0 6px;
   border-radius: 8px 0 0 0;

@@ -1,10 +1,9 @@
-import Input from "../../components/Input/Input";
 import { cities, stateNamings } from "./constants";
 import { useStateAndUpdateRef, useStatelessOf } from "../../helpers";
 import { useEffect } from "preact/hooks";
-import { Fragment } from "preact/compat";
-import Dropdown from "../../components/Dropdown/Dropdown";
+import { Dropdown, Input } from "../../components/staticComponents";
 import useWindowSize from "../../hooks/useWindowSize";
+import { validatePhoneNumber } from "../Login/Inputs";
 
 export const Emer = (props) => {
   const { value, onChange } = useFormInput(stateNamings, props, stateNamings.emer[0]);
@@ -189,11 +188,6 @@ export const Phone = (props) => {
     />
   );
 };
-
-function validatePhoneNumber(phoneNumber) {
-  const albanianRegex = /^((\+|00)355|0)6[789][0-9]{7}$/;
-  return albanianRegex.test(phoneNumber);
-}
 
 export const Fjalekalim = (props) => {
   const { value: fjalekalimi, onChange: UpdateFjalekalimi } = useFormInput(

@@ -6,28 +6,7 @@ import { isDeviceTouchable, useStateAndUpdateRef, useStatelessOf } from "../../h
 import { OPEN_IMAGE_PREVIEW_MODAL } from "../../redux/types";
 import fireReduxAction from "../../redux/actions/fireReduxAction";
 import { Fragment } from "preact";
-
-let cdnCache = JSON.parse(localStorage.getItem("EagleZoneImageCdnCacheImgKitAl")) || {};
-
-let accounts = JSON.parse(localStorage.getItem("EagleZoneImageAccountsCacheImgKitAl")) || {
-  eaglezone: 0,
-  eagleZoneAl: 0,
-};
-
-let getCdn = (src, w, q, isBlur) => {
-  let points = isBlur && !w ? 300 : w * (isBlur ? 20 : q);
-  if ((src || "").includes("svg")) points = 100;
-  if ((src || "").includes("png")) points = points * 10;
-  let notUsedAcc =
-    cdnCache[src] ||
-    Object.entries(accounts).reduce((a, [k, v]) => (v < accounts[a] ? k : a), Object.keys(accounts)[0]);
-  accounts[notUsedAcc] = accounts[notUsedAcc] + points / 100;
-  let cdn = `https://ik.imagekit.io/${notUsedAcc}`;
-  cdnCache[src] = notUsedAcc;
-  localStorage.setItem("EagleZoneImageCdnCacheImgKit", JSON.stringify(cdnCache));
-  localStorage.setItem("EagleZoneImageAccountsCacheImgKit", JSON.stringify(accounts));
-  return cdn;
-};
+import { windowSsr } from "../../constants";
 
 const Picture = (props) => {
   const {
@@ -35,7 +14,7 @@ const Picture = (props) => {
     alt,
     quality = 76,
     allowZoom,
-    zoomQuality = allowZoom ? 85 : undefined,
+    zoomQuality = allowZoom ? 83 : undefined,
     className,
     loading,
     sizes,
@@ -44,9 +23,10 @@ const Picture = (props) => {
     zoomLevel = 1,
     onLoad,
     fixedWidth,
+    disableFadeIn,
   } = props;
   const { statelessRef, setStartLoadingZoom, setZoomPos } = useStatelessOf(stateNamings);
-  const hasNotPreview = src.includes(".svg") ? true : props.hasNotPreview;
+  const hasNotPreview = src?.includes?.(".svg") ? true : props.hasNotPreview;
   const [showFullImage, setShowFullImage] = useState(!!hasNotPreview);
   const [zoomLoaded, setZoomLoaded] = useState(false);
   const [zoom, setZoom] = useState(false);
@@ -57,7 +37,7 @@ const Picture = (props) => {
   const { mountedAndShowed } = useOnScreen(imgRef);
 
   const size = getSize(sizes, shouldCover ? Infinity : windowWidth, device);
-  const zoomSize = allowZoom && getSize(zoomSizes || sizes, Infinity, device, true);
+  const zoomSize = allowZoom && getSize(zoomSizes || sizes, windowWidth * 2, device, true);
   const { width, imgWidth, imgHeight, aspectRatio } = size;
   const {
     width: zoomWidth,
@@ -95,7 +75,11 @@ const Picture = (props) => {
   const imgProps = {
     loading: loading || "lazy",
     alt,
-    className: `w-full h-full pointer-events-none ${imgClass || ""}`,
+    className: `w-full h-full pointer-events-none fade-in ${
+      disableFadeIn
+        ? ""
+        : `${showFullImage && mountedAndShowed ? "opacity-100" : "opacity-0"} transition-opacity duration-500`
+    } ${imgClass || ""}`,
     style: { ...(showFullImage ? null : blurStyle), ...(props.style || {}), aspectRatio },
   };
 
@@ -201,22 +185,22 @@ const ZoomLoadManager = (props) => {
 };
 
 const getSrc = (src, shouldBlurr) => {
-  const fileExtension = src.split(".").pop();
+  const fileExtension = (src || "").split(".").pop();
   const filenameWithoutExtension = src.substring(0, src.length - fileExtension.length - 1);
   return `${filenameWithoutExtension}${shouldBlurr ? "Blurry" : ""}.${fileExtension}`;
 };
 
 const blurStyle = { filter: "blur(20px)" };
 
-const isMac = window.navigator.vendor.includes("Apple");
+const isMac = windowSsr?.navigator?.vendor?.includes?.("Apple");
 const buildSrc = (src, w, q, isBlur) => {
-  const base = `${getCdn(src, w, q, isBlur)}/${src}`;
+  const base = `https://api.menaxhimbiznesi.com/api/File/Retrieve?file=${src}`;
   const isSvg = base.includes(".svg");
   return isSvg
     ? base
     : isBlur
-    ? `${base}?tr=q-76`
-    : `${base}?tr=w-${parseInt(w * (isMac ? 1.4 : 1.1))}${q ? `,q-${q}` : ""}`;
+    ? `${base}&quality=60`
+    : `${base}&width=${parseInt(w * (isMac ? 1.4 : 1.1))}${q ? `&quality=${q}` : ""}`;
 };
 
 let sizeCache = {};

@@ -94,11 +94,11 @@
     --martial-chair-aspect-ratio: 0.5482395214;
     --martial-pillow-width: min(
       calc(calc(var(--introduction-chair-height) * var(--martial-chair-aspect-ratio)) * 0.325),
-      calc((100svw - 2rem) * 0.325)
+      calc((100vw - 2rem) * 0.325)
     );
     --correct-chair-height: calc(var(--martial-pillow-width) / 0.325 / 0.5482395214);
     width: var(--martial-pillow-width);
-    left: calc((97.5svw - var(--martial-pillow-width)) / 2);
+    left: calc((97.5vw - var(--martial-pillow-width)) / 2);
     height: var(--correct-chair-height);
     right: unset;
 

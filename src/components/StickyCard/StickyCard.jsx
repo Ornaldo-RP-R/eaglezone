@@ -1,5 +1,5 @@
 import { connect } from "redux-zero/preact";
-import { Link, useRoute } from "wouter";
+import { Link, useRoute } from "wouter-preact";
 
 const StickyCard = (props) => {
   const { cart } = props;
@@ -9,19 +9,21 @@ const StickyCard = (props) => {
     !!cart?.length &&
     !match && (
       <Link href="/checkout">
-        <div className="fixed bottom-[16px] right-[16px] cursor-pointer w-max w-full z-50">
-          <div className="relative bg-gray-900 dark:bg-white-900 flex flex-col items-center p-3 pt-2 rounded-full border hover:scale-105 shadow-sm hover:shadow-primary-600 transition-all border-primary-900 gap-0.5 w-max">
-            <div className="relative">
-              <h6 className="absolute top-0 leading-[22px] left-[3px] flex gap-[0.5px] text-primary-700 flex items-center justify-center">
-                {new Array(cart?.length).fill("").map((_, i) => (
-                  <span key={i}>.</span>
-                ))}
-              </h6>
-              {cartIcon}
+        <a>
+          <button type="button" className="fixed bottom-[16px] right-[16px] cursor-pointer w-max w-full z-50">
+            <div className="relative bg-gray-900 dark:bg-white-900 flex flex-col items-center p-3 pt-2 rounded-full border hover:scale-105 shadow-sm hover:shadow-primary-600 transition-all border-primary-900 gap-0.5 w-max">
+              <div className="relative">
+                <h6 className="absolute top-0 leading-[22px] left-[3px] flex gap-[0.5px] text-primary-700 flex items-center justify-center">
+                  {new Array(cart?.length).fill("").map((_, i) => (
+                    <span key={i}>.</span>
+                  ))}
+                </h6>
+                {cartIcon}
+              </div>
+              <p className="text-xs leading-none">Shporta</p>
             </div>
-            <p className="text-xs leading-none">Shporta</p>
-          </div>
-        </div>
+          </button>
+        </a>
       </Link>
     )
   );

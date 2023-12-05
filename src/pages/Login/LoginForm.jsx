@@ -3,9 +3,9 @@ import { useState } from "preact/hooks";
 import { useStatelessOf } from "../../helpers";
 import { stateNamings } from "./constants";
 import apiActions from "../../redux/actions/apiActions";
-import { navigate } from "wouter/use-location";
+import { navigate } from "wouter-preact/use-location";
 import { connect } from "redux-zero/preact";
-import Submit from "../../components/Submit/Submit";
+import { Submit } from "../../components/staticComponents";
 
 const LoginForm = (props) => {
   const { userIsLoading } = props;
@@ -35,7 +35,7 @@ const LoginForm = (props) => {
         onSubmit={onSubmit}
         title="Hyr"
         isDisabled={isDisabled}
-        href="/signup"
+        href="/regjistrohu"
         description="Nuk keni llogari ?"
         linkTitle="Regjistrohu"
       />

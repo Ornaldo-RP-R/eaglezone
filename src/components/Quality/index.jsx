@@ -1,6 +1,5 @@
 import { useState } from "preact/hooks";
-import Section from "../Section";
-import Picture from "../Picture/Picture";
+import { Picture, Section } from "../staticComponents";
 import "./index.scss";
 import useWindowSize from "../../hooks/useWindowSize";
 import Arrow from "../../assets/images/arrow";

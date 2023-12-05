@@ -14,7 +14,7 @@ persistKeys.forEach((key) => {
   initialState[key] = encodedData ? JSON.parse(atob(encodedData)) : null;
 });
 
-const store = createStore(initialState);
+const store = createStore?.(initialState);
 
 store.subscribe(() => {
   const state = store.getState();

@@ -4,15 +4,16 @@ import { useState } from "preact/hooks";
 import { useStatelessOf } from "../../helpers";
 import apiActions from "../../redux/actions/apiActions";
 import database from "../../constants";
-import { navigate } from "wouter/use-location";
+import { navigate } from "wouter-preact/use-location";
 import { connect } from "redux-zero/preact";
-import Submit from "../../components/Submit/Submit";
+import { Submit } from "../../components/staticComponents";
 
 const SignUpForm = (props) => {
   const { signUpIsLoading, isAffiliateSeller } = props;
   const { statelessRef, getEmer, getPhone, getMbiemer, getEmail, getFjalekalim, getKonfirmimFjalekalimi } =
     useStatelessOf(Object.values(stateNamings));
   const [disabled, setDisabled] = useState(Object.keys(stateNamings || {}));
+  console.log(disabled);
   const isDisabled = disabled?.length >= 1;
 
   const onSubmit = () => {
@@ -50,7 +51,7 @@ const SignUpForm = (props) => {
         onSubmit={onSubmit}
         title="Regjistrohu"
         isDisabled={isDisabled}
-        href="/login"
+        href="/hyr"
         description="Keni Llogari ? "
         linkTitle="Hyr"
       />

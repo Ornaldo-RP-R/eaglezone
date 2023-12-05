@@ -1,14 +1,13 @@
 import Header from "../components/Header";
-import Section from "../components/Section";
+import { Section, useLoadingForDyanmicRoute } from "../components/staticComponents";
 import ShopCategory from "../components/ShopCategory";
 import Chairs from "./Chairs";
 import ShopMain from "../components/ShopMain";
-import useLoadingForDyanmicRoute from "../hooks/useLoadingForDyanmicRoute";
 
 export function Shop() {
   useLoadingForDyanmicRoute();
 
-  const id = new URL(window.location.href).pathname.split("/")[2];
+  const id = new URL(window.location.href).pathname.split("/")[3];
 
   return (
     <div className="app h-screen h-screen z-0 relative flex flex-col">
@@ -19,7 +18,7 @@ export function Shop() {
         <Header onShop />
       </Section>
       <ShopMain>
-        {id === "karrige" ? (
+        {id === "karrige-gaming-zyre" ? (
           <Chairs />
         ) : (
           <h4 className="md:px-8 xxl:px-48 lg:px-6 px-2 text-center font-bold md:m-0 m-auto flex items-center h-full w-full">

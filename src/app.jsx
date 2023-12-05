@@ -1,14 +1,15 @@
 import { useState, useEffect } from "preact/hooks";
 import { lazy, Suspense, Fragment } from "preact/compat";
 import ImagePreviewModal from "./components/ImagePreview";
-import { Route, Switch } from "wouter";
+import { Router, Route, Switch } from "wouter-preact";
 import "./assets/theme/app.scss";
-import Alerts from "./components/Alerts/Alerts";
+import { Alerts } from "./components/staticComponents";
 import { connect } from "redux-zero/preact";
 import fireReduxAction from "./redux/actions/fireReduxAction";
 import { SET_APP_LOADING } from "./redux/types";
 import StickyCard from "./components/StickyCard/StickyCard";
 import apiActions from "./redux/actions/apiActions";
+import { windowSsr } from "./constants";
 
 const Home = lazy(() => import("./pages/Home"));
 const ProductView = lazy(() => import("./pages/ProductView"));
@@ -27,7 +28,7 @@ export const App = connect(mapStateToProps)((props) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search);
+    const searchParams = new URLSearchParams(windowSsr.location.search);
     const code = searchParams.get("code");
 
     if (code) {
@@ -40,8 +41,8 @@ export const App = connect(mapStateToProps)((props) => {
   }, []);
 
   return (
-    mounted && (
-      <Fragment>
+    !!mounted && (
+      <Router>
         <StickyCard />
         <AppLoader />
         <Alerts />
@@ -51,23 +52,23 @@ export const App = connect(mapStateToProps)((props) => {
             <Route exact path="/" component={Home} />
             {!userToken && (
               <Fragment>
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/signup">
+                <Route exact path="/hyr" component={Login} />
+                <Route exact path="/regjistrohu">
                   {() => <Login shouldRegister />}
                 </Route>
-                <Route exact path="/signup/affiliateSeller">
+                <Route exact path="/regjistrohu/affiliateSeller">
                   {() => <Login shouldRegister isAffiliateSeller />}
                 </Route>
               </Fragment>
             )}
             <Route exact path="/profili" component={Profili} />
-            <Route exact path="/shop/:id/:id" component={ProductView} />
-            <Route exact path="/shop/:id" component={Shop} />
+            <Route exact path="/gaming/aksesore/:id/:id" component={ProductView} />
+            <Route exact path="/gaming/aksesore/:id" component={Shop} />
             {hasInCart && <Route exact path="/checkout" component={Checkout} />}
             <Route component={NotFound} />
           </Switch>
         </Suspense>
-      </Fragment>
+      </Router>
     )
   );
 });

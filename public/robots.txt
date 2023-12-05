@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /private/
+Disallow: /confidential-file.html
+Sitemap: https://eaglezone.al/sitemap.xml

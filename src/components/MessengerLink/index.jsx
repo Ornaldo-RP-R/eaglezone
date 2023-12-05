@@ -1,20 +1,17 @@
 import { copyToClipboard, facebookName } from "../../helpers";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const MessengerLink = (props) => {
   const { recipientId, message, children } = props;
-  const onClick = (e) => {
-    e.preventDefault();
-    copyToClipboard(facebookName);
-    window.open(`https://m.me/${recipientId}?ref=${encodeURIComponent(message)}`);
-  };
+  const { isMobile } = useWindowSize();
+
+  const onClick = () => copyToClipboard(facebookName);
+
   return (
-    <a
-      href="#"
-      aria-label={`Per me teper na shkruaj nje mesazh ne messenger ne emrin ${facebookName}`}
-      target="_blank"
-      onClick={onClick}
-    >
-      {children}
+    <a href={`https://m.me/${recipientId}?ref=${encodeURIComponent(message)}`} target="_blank">
+      <button aria-label={isMobile ? "Na shkruani ne facebook" : undefined} type="button" onClick={onClick}>
+        {children}
+      </button>
     </a>
   );
 };

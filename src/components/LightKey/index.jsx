@@ -1,8 +1,9 @@
 import { useState } from "preact/hooks";
 import "./index.scss";
-import { darkMode } from "../../helpers";
+import { windowSsr } from "../../constants";
 
 const LightKey = () => {
+  const darkMode = JSON.parse(windowSsr?.sessionStorage?.getItem?.("Eagle-Zone-Dark-Mode") || "true");
   const [isDark, setIsDark] = useState(darkMode);
   return (
     <label

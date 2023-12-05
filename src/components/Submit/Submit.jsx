@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link } from "wouter-preact";
 
 export const Submit = (props) => {
   const { title, isDisabled, href, linkTitle, description, isLoading, onSubmit, className, buttonClassName } = props;
@@ -35,15 +35,18 @@ export const Submit = (props) => {
       {linkTitle && (
         <div className="flex items-center mx-auto mb-2">
           <span className="text-white-600 dark:text-gray-600 flex items-center mr-1 cursor-pointer">{description}</span>
-          <Link href={href} aria-label="Shko tek signup ose login">
-            <span className="text-white-900 dark:text-gray-900 hover:text-secondary-700  dark:hover:text-secondary-700 flex items-center cursor-pointer">
-              {linkTitle}
-            </span>
+          <Link href={href}>
+            <a>
+              <span className="text-white-900 dark:text-gray-900 hover:text-secondary-700  dark:hover:text-secondary-700 flex items-center cursor-pointer">
+                {linkTitle}
+              </span>
+            </a>
           </Link>
         </div>
       )}
       <button
         onClick={onClick}
+        type="button"
         className={`text-gray-900 dark:text-white-900 button is-primary ${buttonClassName || ""} ${
           isDisabled && !isLoading ? "is-disabled" : ""
         }`}
